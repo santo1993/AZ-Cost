@@ -119,17 +119,31 @@ class CostService:
         except Exception as e:
             logger.warning(f"Could not fetch subscription names: {e}")
         
+        from ..utils.batch import batch_process
+        
         end_date = datetime.utcnow()
         start_date = end_date - timedelta(days=days)
         
-        # Run queries in parallel using thread pool
-        loop = asyncio.get_event_loop()
-        tasks = [
-            loop.run_in_executor(_executor, self._query_subscription_cost, sub_id, start_date, end_date, days)
-            for sub_id in subs
-        ]
-        
-        results = await asyncio.gather(*tasks)
+        # Define processor function for batching
+        async def process_sub(sub_id):
+            loop = asyncio.get_event_loop()
+            return await loop.run_in_executor(
+                _executor, 
+                self._query_subscription_cost, 
+                sub_id, 
+                start_date, 
+                end_date, 
+                days
+            )
+            
+        # Process in batches of 5 with 0.1 second delay (faster processing)
+        logger.info(f"Processing {len(subs)} subscriptions in batches...")
+        results = await batch_process(
+            subs,
+            process_sub,
+            batch_size=5,
+            delay_seconds=0.1
+        )
         
         # Add subscription names to results
         for r in results:

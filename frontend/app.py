@@ -4,12 +4,14 @@ Main Streamlit Application.
 import streamlit as st
 import sys
 import os
+import time # Added for scan progress bar
 
 # Adjust path to import services/components
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
 
-from components.sidebar import render_sidebar
+# Assuming api_client is in a services directory
+from services import api_client
 
 # Page Config
 st.set_page_config(
@@ -24,12 +26,6 @@ if 'subscription_ids' not in st.session_state:
     st.session_state.subscription_ids = ""
 if 'enable_underutilized_vm_check' not in st.session_state:
     st.session_state.enable_underutilized_vm_check = False
-
-# Sidebar
-render_sidebar()
-
-# Landing Page Content (if not navigating)
-st.title("💸 Azure Cost Optimization Dashboard")
 
 st.markdown("""
 ### Welcome

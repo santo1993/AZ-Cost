@@ -33,15 +33,26 @@ class AdvisorService:
             logger.warning("No subscription IDs found for Advisor check.")
             return []
 
-        for sub_id in subs:
+        if not subs:
+            logger.warning("No subscription IDs found for Advisor check.")
+            return []
+
+        from ..utils.batch import batch_process
+
+        async def process_sub(sub_id):
+            sub_issues = []
             try:
-                client = AdvisorManagementClient(credential, sub_id)
-                # Filter for Cost recommendations (Category = Cost)
-                recs = client.recommendations.list(filter="Category eq 'Cost'")
+                # Run in executor because Advisor client is sync
+                loop = asyncio.get_event_loop()
+                
+                def _fetch_advisor():
+                     client = AdvisorManagementClient(credential, sub_id)
+                     return list(client.recommendations.list(filter="Category eq 'Cost'"))
+                     
+                recs = await loop.run_in_executor(None, _fetch_advisor)
                 
                 for rec in recs:
                     # Parse extended properties for savings
-                    # Advisor savings logic can be complex
                     savings = 0.0
                     props = rec.extended_properties or {}
                     if 'savingsAmount' in props:
@@ -50,7 +61,7 @@ class AdvisorService:
                         except:
                             pass
                             
-                    issues.append(OptimizationIssue(
+                    sub_issues.append(OptimizationIssue(
                         id=f"advisor-{rec.name}",
                         resource_id=rec.resource_metadata.resource_id,
                         resource_name=rec.resource_metadata.resource_id.split('/')[-1] if rec.resource_metadata.resource_id else "Unknown",
@@ -63,10 +74,20 @@ class AdvisorService:
                         potential_savings=savings,
                         recommendation=rec.short_description.solution if rec.short_description else "Follow Advisor guide."
                     ))
-
             except Exception as e:
                 logger.error(f"Failed to fetch Advisor recommendations for subscription {sub_id}: {e}")
-                
+            return sub_issues
+
+        logger.info(f"Fetching Advisor recommendations for {len(subs)} subscriptions (batch processing)...")
+        results_nested = await batch_process(
+            subs,
+            process_sub,
+            batch_size=5,
+            delay_seconds=1.0
+        )
+        
+        # Flatten results
+        issues = [issue for sub_results in results_nested for issue in sub_results]
         return issues
 
 advisor_service = AdvisorService()

@@ -10,7 +10,7 @@ import uuid
 import traceback
 
 from .config import get_settings
-from .api.routers import resources, savings, export, costs
+from .api.routers import resources, savings, export, costs, scans
 from .utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -72,6 +72,7 @@ app.include_router(resources.router, prefix="/api", tags=["Resources"])
 app.include_router(savings.router, prefix="/api", tags=["Savings"])
 app.include_router(export.router, prefix="/api", tags=["Export"])
 app.include_router(costs.router, prefix="/api", tags=["Costs"])
+app.include_router(scans.router, prefix="/api", tags=["Scans"])
 
 if __name__ == "__main__":
     import uvicorn

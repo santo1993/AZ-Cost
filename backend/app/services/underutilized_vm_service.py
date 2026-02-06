@@ -87,65 +87,73 @@ class UnderutilizedVMService:
             
             credential = auth_service.get_credential()
             
-            # Track time to avoid infinite hangs (but allow enough time for all VMs)
-            import time
-            start_time_check = time.time()
-            MAX_TOTAL_SECONDS = 300  # 5 minutes max - check as many VMs as possible
-            vms_checked = 0
+            # Use batch processing for checking VMs
+            from ..utils.batch import batch_process
             
-            for vm in vms:
-                # Check if we've exceeded time limit
-                elapsed = time.time() - start_time_check
-                if elapsed > MAX_TOTAL_SECONDS:
-                    logger.warning(f"Timeout reached after checking {vms_checked} VMs, returning partial results")
-                    break
-                    
+            async def process_vm_metrics(vm):
                 try:
                     vm_id = vm['id']
                     sub_id = vm['subscriptionId']
                     vm_size = vm.get('vmSize') or 'Unknown'
                     
                     # Get metrics from Azure Monitor
-                    monitor_client = MonitorManagementClient(credential, sub_id)
+                    # Monitor client needs to be created inside the loop/executor if async, 
+                    # but here we are in an async function so it's fine.
+                    # Note: MonitorManagementClient is synchronous, so we should ideally run in executor
                     
                     # Calculate time range
                     end_time = datetime.utcnow()
                     start_time = end_time - timedelta(days=days)
                     timespan = f"{start_time.isoformat()}Z/{end_time.isoformat()}Z"
                     
-                    # Query CPU metrics only (skip memory to be faster)
-                    avg_cpu = await self._get_average_metric(
-                        monitor_client, vm_id, "Percentage CPU", timespan
-                    )
+                    # Query metrics
+                    # We'll run the synchronous client call in an executor
+                    loop = asyncio.get_event_loop()
+                    def _get_metric():
+                        client = MonitorManagementClient(credential, sub_id)
+                        return self._get_average_metric_sync(client, vm_id, "Percentage CPU", timespan)
                     
-                    vms_checked += 1
-                    logger.info(f"Checked VM {vms_checked}/{len(vms)}: {vm['name']} - CPU: {avg_cpu:.1f}%" if avg_cpu else f"Checked VM {vms_checked}/{len(vms)}: {vm['name']} - CPU: N/A")
+                    avg_cpu = await loop.run_in_executor(None, _get_metric)
                     
                     # Check threshold (CPU only for speed)
                     if avg_cpu is not None and avg_cpu < cpu_threshold:
-                        # Calculate potential savings
-                        potential_savings = VM_SIZE_COSTS.get(vm_size, DEFAULT_VM_COST)
-                        
-                        issues.append(OptimizationIssue(
-                            id=f"underutilized-vm-{vm_id}",
-                            resource_id=vm_id,
-                            resource_name=vm['name'],
-                            resource_type="Underutilized VM",
-                            subscription_id=sub_id,
-                            subscription_name=sub_name_map.get(sub_id, sub_id[:8] + "..."),
-                            resource_group=vm['resourceGroup'],
-                            issue_type="Underutilized VM",
-                            severity="Medium",
-                            description=f"VM ({vm_size}) with low CPU utilization: {avg_cpu:.1f}% (avg over {days} days)",
-                            potential_savings=round(potential_savings * 0.5, 2),  # Estimate 50% savings by rightsizing
-                            recommendation="Consider rightsizing to a smaller VM or deallocating if not needed."
-                        ))
-                            
+                         potential_savings = VM_SIZE_COSTS.get(vm_size, DEFAULT_VM_COST)
+                         
+                         return OptimizationIssue(
+                             id=f"underutilized-vm-{vm_id}",
+                             resource_id=vm_id,
+                             resource_name=vm['name'],
+                             resource_type="Underutilized VM",
+                             subscription_id=sub_id,
+                             subscription_name=sub_name_map.get(sub_id, sub_id[:8] + "..."),
+                             resource_group=vm['resourceGroup'],
+                             issue_type="Underutilized VM",
+                             severity="Medium",
+                             description=f"VM ({vm_size}) with low CPU utilization: {avg_cpu:.1f}% (avg over {days} days)",
+                             potential_savings=round(potential_savings * 0.5, 2),  # Estimate 50% savings by rightsizing
+                             recommendation="Consider rightsizing to a smaller VM or deallocating if not needed."
+                         )
+                    return None
+                    
                 except Exception as e:
-                    logger.warning(f"Could not get metrics for VM {vm['name']}: {e}")
-                    continue
+                    logger.warning(f"Error checking VM {vm['name']}: {e}")
+                    return None
+
+            logger.info(f"Checking {total_vms} VMs for underutilization (batch processing)...")
             
-            logger.info(f"Completed underutilized VM check: {len(issues)} underutilized VMs found out of {vms_checked} checked")
+            # Use larger batch size for VMs as metric queries are relatively fast but numerous
+            # 20 concurrent checks, 0.5s delay
+            results = await batch_process(
+                vms,
+                process_vm_metrics,
+                batch_size=20,
+                delay_seconds=0.5
+            )
+            
+            # Filter out None results
+            issues = [r for r in results if r]
+            
+            logger.info(f"Completed underutilized VM check: {len(issues)} underutilized VMs found")
                     
         except Exception as e:
             logger.error(f"Failed to query running VMs: {e}")
@@ -154,7 +162,7 @@ class UnderutilizedVMService:
         
         return issues
     
-    async def _get_average_metric(
+    def _get_average_metric_sync(
         self, 
         client: MonitorManagementClient, 
         resource_id: str, 
@@ -162,7 +170,7 @@ class UnderutilizedVMService:
         timespan: str,
         is_memory: bool = False
     ) -> Optional[float]:
-        """Get average metric value over the timespan."""
+        """Get average metric value over the timespan (Synchronous)."""
         try:
             metrics_data = client.metrics.list(
                 resource_uri=resource_id,
