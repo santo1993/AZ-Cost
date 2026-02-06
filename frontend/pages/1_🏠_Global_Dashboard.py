@@ -3,7 +3,7 @@ Global Dashboard Page.
 """
 import streamlit as st
 import pandas as pd
-from services.api_client import api_client
+from services.api_client import cached_get_costs, cached_get_savings_summary, get_subscription_name_map
 from components.cards import render_kpi_card, render_savings_card
 from components.charts import render_savings_pie_chart
 
@@ -16,16 +16,17 @@ col_header_1, col_header_2 = st.columns([8, 1])
 with col_header_2:
     if st.button("🔄 Refresh"):
         st.cache_data.clear()
+        st.rerun()
 
-# Fetch Data
-with st.spinner("Fetching Azure data..."):
-    subs = st.session_state.get("subscription_ids")
+# Fetch Data (CACHED - will only fetch once per hour or until refresh clicked)
+subs = st.session_state.get("subscription_ids")
+
+with st.spinner("Loading data..."):
+    # Fetch actual costs (last 30 days) - CACHED
+    cost_data = cached_get_costs(subs, days=30)
     
-    # Fetch actual costs (last 30 days)
-    cost_data = api_client.get_costs(subs, days=30)
-    
-    # Fetch savings recommendations
-    savings_data = api_client.get_savings_summary(subs)
+    # Fetch savings recommendations - CACHED
+    savings_data = cached_get_savings_summary(subs)
     
     # Calculate totals
     total_spend = cost_data.get("total", 0.0)
@@ -69,13 +70,28 @@ sub_costs = cost_data.get("subscriptions", [])
 if sub_costs:
     df_subs = pd.DataFrame(sub_costs)
     if not df_subs.empty and "cost" in df_subs.columns:
-        st.bar_chart(df_subs.set_index("subscription_id")["cost"])
+        # Use subscription_name from API response if available (new), fallback to lookup
+        if "subscription_name" not in df_subs.columns:
+            try:
+                sub_name_map = get_subscription_name_map()
+            except:
+                sub_name_map = {}
+            df_subs["subscription_name"] = df_subs["subscription_id"].apply(
+                lambda x: sub_name_map.get(x, x[:8] + "...") if sub_name_map else x[:8] + "..."
+            )
+        
+        # Show chart with subscription names
+        st.bar_chart(df_subs.set_index("subscription_name")["cost"])
+        
+        # Show table with subscription names
         st.dataframe(
             df_subs,
+            column_order=["subscription_name", "cost", "period_days"],
             column_config={
-                "subscription_id": "Subscription",
+                "subscription_name": "Subscription",
                 "cost": st.column_config.NumberColumn("Cost (USD)", format="$%.2f"),
-                "period_days": "Days"
+                "period_days": "Days",
+                "subscription_id": None  # Hide subscription ID
             },
             use_container_width=True,
             hide_index=True

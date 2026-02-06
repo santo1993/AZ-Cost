@@ -42,3 +42,28 @@ async def get_resources(
     except Exception as e:
         logger.error(f"Error fetching resources: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/subscriptions")
+async def get_subscriptions(force_refresh: bool = False):
+    """
+    Get list of all subscriptions with names and IDs.
+    """
+    from ...services.subscription_service import subscription_service
+    
+    cache_key = "subscriptions_list_v2"
+    
+    # Check if already cached
+    cached = memory_cache.get(cache_key)
+    if cached and not force_refresh:
+        return cached
+    
+    # Fetch fresh data - call internal method directly to bypass service cache
+    try:
+        sub_details = await subscription_service._fetch_subscription_details()
+        if sub_details:
+            memory_cache.set(cache_key, sub_details)
+            return sub_details
+        return []
+    except Exception as e:
+        logger.error(f"Failed to fetch subscriptions: {e}")
+        return []

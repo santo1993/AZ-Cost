@@ -4,10 +4,15 @@ Cost History Page - Stacked Bar Chart like AWS Cost Explorer.
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from services.api_client import api_client
+from services.api_client import cached_get_monthly_cost_history
 
 st.set_page_config(page_title="Cost History", page_icon="📊", layout="wide")
 st.title("📊 Cost History")
+
+# Refresh button
+if st.button("🔄 Refresh Data"):
+    st.cache_data.clear()
+    st.rerun()
 
 # Options Bar (similar to AWS Cost Explorer)
 st.markdown("### Filter Options")
@@ -26,8 +31,8 @@ with col2:
         "Months",
         min_value=3,
         max_value=12,
-        value=6,
-        help="Number of months to display"
+        value=3,  # Default to 3 months for faster loading
+        help="Number of months to display (more months = slower loading)"
     )
 
 with col3:
@@ -46,12 +51,11 @@ with col4:
         help="Visualization style"
     )
 
-# Fetch Data
-with st.spinner("Fetching cost history..."):
-    subs = st.session_state.get("subscription_ids")
-    
-    # Get monthly cost data
-    cost_history = api_client.get_monthly_cost_history(subs, months=months)
+# Fetch Data - CACHED
+subs = st.session_state.get("subscription_ids")
+
+with st.spinner("Loading cached cost history..."):
+    cost_history = cached_get_monthly_cost_history(subs, months=months)
     
     data = cost_history.get("data", [])
     services = cost_history.get("services", [])

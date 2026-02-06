@@ -35,6 +35,7 @@ class OptimizationIssue(BaseModel):
     resource_name: str
     resource_type: str
     subscription_id: str
+    subscription_name: Optional[str] = None  # Friendly display name
     resource_group: str
     issue_type: str  # Zombie, Orphaned, Oversized, Advisor
     severity: str    # High, Medium, Low
