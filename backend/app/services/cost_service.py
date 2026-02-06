@@ -47,7 +47,7 @@ class CostService:
                     to=end_date
                 ),
                 dataset=QueryDataset(
-                    granularity="None",
+                    granularity="Daily",  # "None" often fails, use Daily and sum
                     aggregation={
                         "totalCost": QueryAggregation(
                             name="Cost",
@@ -60,16 +60,29 @@ class CostService:
             response = client.query.usage(scope=scope, parameters=query)
             
             cost = 0.0
-            if response.rows and len(response.rows) > 0:
-                cost = float(response.rows[0][0]) if response.rows[0][0] else 0.0
-                logger.info(f"Subscription {sub_id}: Cost = ${cost:.2f}")
+            if response.rows:
+                # Sum up cost from all daily rows
+                for row in response.rows:
+                     if row[0]:
+                         cost += float(row[0])
+            
+            # FALLBACK: If ActualCost is 0, try AmortizedCost
+            if cost == 0.0:
+                 logger.info(f"Subscription {sub_id}: ActualCost is 0, trying AmortizedCost...")
+                 query.type = ExportType.AMORTIZED_COST
+                 response = client.query.usage(scope=scope, parameters=query)
+                 if response.rows:
+                    for row in response.rows:
+                        if row[0]:
+                            cost += float(row[0])
+                 logger.info(f"Subscription {sub_id}: AmortizedCost = ${cost:.2f}")
             else:
-                logger.warning(f"Subscription {sub_id}: No cost data rows returned")
+                logger.info(f"Subscription {sub_id}: Total Cost = ${cost:.2f}")
             
             return {
                 "subscription_id": sub_id,
                 "cost": round(cost, 2),
-                "currency": "USD",
+                "currency": "USD", # Defaulting to USD, should ideally take from response
                 "period_days": days
             }
             
@@ -149,7 +162,7 @@ class CostService:
                     to=end_date
                 ),
                 dataset=QueryDataset(
-                    granularity="None",
+                    granularity="Daily", # Changed from None to Daily
                     aggregation={
                         "totalCost": QueryAggregation(
                             name="Cost",
@@ -167,17 +180,35 @@ class CostService:
             
             response = client.query.usage(scope=scope, parameters=query)
             
-            results = []
+            # Aggregate daily results by RG
+            rg_costs = {}
             if response.rows:
                 for row in response.rows:
                     cost = float(row[0]) if row[0] else 0.0
-                    rg_name = row[1] if len(row) > 1 else "Unknown"
-                    results.append({
-                        "subscription_id": sub_id,
-                        "resource_group": rg_name,
-                        "cost": round(cost, 2),
-                        "currency": "USD"
-                    })
+                    # With Daily granularity, row structure might trigger date column?
+                    # Usually [Cost, Date, ResourceGroup] or [Cost, ResourceGroup, Date] ?
+                    # Let's check grouping order or assume last cols are dimensions
+                    # Typically: [Cost, Date, Grouping1, Grouping2...]
+                    # row[0] = Cost
+                    # row[1] = UsageDate (because Daily)
+                    # row[2] = ResourceGroup
+                    
+                    rg_name = "Unknown"
+                    if len(row) > 2:
+                        rg_name = row[2]
+                        
+                    if rg_name not in rg_costs:
+                        rg_costs[rg_name] = 0.0
+                    rg_costs[rg_name] += cost
+
+            results = []
+            for rg_name, cost in rg_costs.items():
+                results.append({
+                    "subscription_id": sub_id,
+                    "resource_group": rg_name,
+                    "cost": round(cost, 2),
+                    "currency": "USD"
+                })
             return results
             
         except Exception as e:
