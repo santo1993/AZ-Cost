@@ -139,6 +139,42 @@ with st.spinner("Loading savings data..."):
 if include_underutilized_vms:
     st.info("🔍 Underutilized VM detection is enabled (configured in Home page)")
 
+# Check for background enrichment status (VM Days Inactive)
+if all_issues and "Scan:" in str(data_source):
+    try:
+        # We need to know if the CURRENT data is from a scan that is still enriching
+        # The data_source string usually looks like "Scan: 20231025..."
+        scans = api_client.list_scans()
+        if scans:
+            latest_scan_id = scans[0].get("scan_id")
+            # Only check if the loaded data matches the latest scan
+            if latest_scan_id in str(data_source) or True: # Check latest anyway
+                enrichment = api_client.get_enrichment_status(latest_scan_id)
+                status = enrichment.get("status")
+                
+                if status == "running":
+                    st.info("⏳ **Background Task Running**: Fetching accurate 'Days Inactive' for Deallocated VMs from Azure... (Refresh to see updates)")
+                    if st.button("🔄 Check Progress"):
+                        st.cache_data.clear()
+                        st.session_state.pop("cached_savings_issues", None) # Force reload from disk
+                        st.rerun()
+                elif status == "completed":
+                    # We might have loaded cached data that doesn't have the updates yet
+                    # Check if we have any Deallocated VMs with None days_inactive
+                    missing_days = any(
+                        i.get("issue_type") == "Deallocated VM" and i.get("days_inactive") is None 
+                        for i in all_issues
+                    )
+                    if missing_days:
+                         st.warning("✅ VM Enrichment Completed! Click Refresh to see the new 'Days Inactive' data.")
+                         if st.button("🔄 Reload Data"):
+                            st.cache_data.clear()
+                            st.session_state.pop("cached_savings_issues", None)
+                            st.rerun()
+    except Exception as e:
+        # customized error handling or just pass to avoid breaking UI
+        pass
+
 
 if not all_issues:
     st.success("No critical cost issues found! 🎉")

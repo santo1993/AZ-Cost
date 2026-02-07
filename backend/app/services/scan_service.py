@@ -24,6 +24,10 @@ class ScanService:
             
     def _get_scan_path(self, scan_id: str) -> str:
         return os.path.join(self.data_dir, scan_id)
+    
+    def get_scan_dir(self, scan_id: str) -> str:
+        """Get the directory path for a scan (public method for enrichment service)."""
+        return self._get_scan_path(scan_id)
         
     def create_scan_id(self) -> str:
         """Generate a unique scan ID based on timestamp."""

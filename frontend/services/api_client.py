@@ -88,7 +88,7 @@ class ApiClient:
         params = {"months": months}
         if subscription_ids:
              params["subscription_ids"] = subscription_ids
-        return self._get("/costs/monthly-history", params, timeout=60) or {"months": [], "services": [], "data": []}
+        return self._get("/costs/monthly-history", params, timeout=180) or {"months": [], "services": [], "data": []}
 
     # Scan Management
     def start_scan(self, mode: str = "live") -> Dict[str, Any]:
@@ -98,6 +98,10 @@ class ApiClient:
     def get_scan_status(self) -> Dict[str, Any]:
         """Get status of current running scan."""
         return self._get("/scans/status", timeout=5)
+
+    def get_enrichment_status(self, scan_id: str) -> Dict[str, Any]:
+        """Get status of background VM enrichment."""
+        return self._get(f"/scans/enrichment-status?scan_id={scan_id}", timeout=5)
         
     def list_scans(self) -> List[Dict[str, Any]]:
         """List historical scans."""

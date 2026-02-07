@@ -13,6 +13,7 @@ from ...services.orphaned_service import orphaned_service
 from ...services.advisor_service import advisor_service
 from ...services.underutilized_vm_service import underutilized_vm_service
 from ...services.subscription_service import subscription_service
+from ...services.vm_enrichment_service import vm_enrichment_service
 from ...utils.logger import get_logger
 
 router = APIRouter(prefix="/scans", tags=["scans"])
@@ -138,9 +139,14 @@ async def run_full_scan(scan_id: str):
         # Save to disk
         scan_service.save_scan(scan_id, data)
         
+        # Start background enrichment for VM days_inactive
+        data_dir = scan_service.get_scan_dir(scan_id)
+        vm_enrichment_service.start_enrichment(scan_id, data_dir)
+        logger.info(f"Started background VM enrichment for scan {scan_id}")
+        
         current_scan["status"] = "completed"
         current_scan["progress"] = 100
-        current_scan["current_stage"] = "Completed"
+        current_scan["current_stage"] = "Completed (VM enrichment running in background)"
         logger.info(f"Scan {scan_id} completed successfully")
         
     except Exception as e:
@@ -180,8 +186,14 @@ def list_scans():
     """List historical scans."""
     return scan_service.list_scans()
 
+@router.get("/enrichment-status")
+async def get_enrichment_status(scan_id: str):
+    """Get the status of background VM enrichment for a scan."""
+    status = vm_enrichment_service.get_status(scan_id)
+    return {"status": status, "scan_id": scan_id}
+
 @router.get("/{scan_id}")
-def get_scan(scan_id: str):
+async def get_scan(scan_id: str):
     """Get full data for a scan."""
     data = scan_service.load_scan(scan_id)
     if not data:

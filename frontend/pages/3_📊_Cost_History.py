@@ -51,66 +51,15 @@ with col4:
         help="Visualization style"
     )
 
-# Helper to get cached history data from scan
-def get_cached_cost_history():
-    """Check session state first, then try to load from scan."""
-    # Check session state cache
-    if "cached_cost_history" in st.session_state:
-        return st.session_state.cached_cost_history, "Cached (Session)"
-    
-    try:
-        scans = api_client.list_scans()
-        if scans:
-            latest = scans[0]
-            scan_data = api_client.get_scan_data(latest.get("scan_id"))
-            if scan_data and scan_data.get("costs"):
-                costs = scan_data.get("costs", {})
-                history = costs.get("history", {})
-                
-                if history:
-                    # Transform daily history into format for display
-                    # Group by month and aggregate
-                    monthly_data = {}
-                    for date_str, cost in history.items():
-                        # Extract month (YYYY-MM format)
-                        month = date_str[:7]
-                        if month not in monthly_data:
-                            monthly_data[month] = 0
-                        monthly_data[month] += cost
-                    
-                    # Create data format for display
-                    data = []
-                    for month, total_cost in sorted(monthly_data.items()):
-                        data.append({
-                            "month": month,
-                            "service": "All Services",
-                            "cost": total_cost
-                        })
-                    
-                    result = {
-                        "months": sorted(monthly_data.keys()),
-                        "services": ["All Services"],
-                        "data": data
-                    }
-                    
-                    st.session_state.cached_cost_history = result
-                    return result, f"Scan: {latest.get('scan_id', '')[:8]}..."
-    except Exception as e:
-        st.warning(f"Could not load from scan: {e}")
-    return None, None
-
-# Fetch Data - Check scan cache first, then fallback to API
+# Fetch Data: Always use the live API for cost history to get proper service breakdown
 subs = st.session_state.get("subscription_ids")
 
-with st.spinner("Loading cost history..."):
-    cost_history, data_source = get_cached_cost_history()
+with st.spinner("Loading cost history from Azure Cost Management API..."):
+    # Use the live API endpoint which provides proper monthly data with service breakdown
+    cost_history = cached_get_monthly_cost_history(subs, months=months)
     
     if cost_history:
-        st.success(f"📦 Using cached scan data. {data_source}")
-    else:
-        # Fallback to live API (slower)
-        st.warning("⏳ No recent scan found. Fetching live data (this may take a while)...")
-        cost_history = cached_get_monthly_cost_history(subs, months=months)
+        st.success(f"📊 Loaded {months} months of cost history with service breakdown.")
     
     data = cost_history.get("data", []) if cost_history else []
     services = cost_history.get("services", []) if cost_history else []
