@@ -33,7 +33,7 @@ async def get_advisor_recommendations(
 @router.get("/orphaned", response_model=List[OptimizationIssue])
 async def get_orphaned_resources(
     subscription_ids: Optional[str] = Query(None),
-    zombie_days: int = Query(30, ge=1, le=365, description="Minimum days for zombie resources"),
+    zombie_days: int = Query(30, ge=0, le=365, description="Minimum days for zombie resources"),
     include_costs: bool = Query(True, description="Include actual costs from Cost Management (slower)"),
     force_refresh: bool = False
 ):

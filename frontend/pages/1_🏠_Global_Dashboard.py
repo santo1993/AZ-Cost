@@ -3,7 +3,8 @@ Global Dashboard Page.
 """
 import streamlit as st
 import pandas as pd
-from services.api_client import cached_get_costs, cached_get_savings_summary, get_subscription_name_map
+from services.api_client import api_client, cached_get_costs, cached_get_savings_summary, get_subscription_name_map
+
 from components.cards import render_kpi_card, render_savings_card
 from components.charts import render_savings_pie_chart
 
@@ -18,18 +19,77 @@ with col_header_2:
         st.cache_data.clear()
         st.rerun()
 
-# Fetch Data (CACHED - will only fetch once per hour or until refresh clicked)
+# Try to get data from latest completed scan first (fast path)
+def get_latest_scan_data():
+    """Check session state first, then API for completed scan data."""
+    # Check session state cache first (survives refreshes)
+    if "cached_cost_data" in st.session_state and "cached_savings_data" in st.session_state:
+        return st.session_state.cached_cost_data, st.session_state.cached_savings_data, "Cached (Session)"
+    
+    try:
+        scans = api_client.list_scans()
+        if scans:
+            # Get latest scan
+            latest = scans[0]
+            scan_data = api_client.get_scan_data(latest.get("scan_id"))
+            if scan_data and scan_data.get("costs"):
+                # Cache in session state for next refresh
+                st.session_state.cached_cost_data = scan_data.get("costs")
+                
+                # Also extract savings_summary from scan data (much faster than live API)
+                savings_summary = scan_data.get("savings_summary", {})
+                # Build breakdown from orphaned and advisor issues if available
+                orphaned_issues = scan_data.get("orphaned", [])
+                advisor_issues = scan_data.get("advisor", [])
+                
+                # Convert to dicts if they are Pydantic models
+                breakdown = []
+                for issue in orphaned_issues:
+                    if hasattr(issue, 'model_dump'):
+                        breakdown.append(issue.model_dump())
+                    elif isinstance(issue, dict):
+                        breakdown.append(issue)
+                for issue in advisor_issues:
+                    if hasattr(issue, 'model_dump'):
+                        breakdown.append(issue.model_dump())
+                    elif isinstance(issue, dict):
+                        breakdown.append(issue)
+                
+                # Build complete savings data
+                savings_data = {
+                    "total_potential_monthly_savings": savings_summary.get("total_potential_monthly_savings", 0),
+                    "savings_by_category": savings_summary.get("components", {}),
+                    "total_recommendations": len(breakdown),
+                    "breakdown": breakdown
+                }
+                st.session_state.cached_savings_data = savings_data
+                
+                return scan_data.get("costs"), savings_data, f"Scan: {latest.get('scan_id', '')[:8]}..."
+    except Exception as e:
+        st.warning(f"Could not load scan list: {e}")
+    return None, None, None
+
+# Fetch Data - Check scan first, then fallback to API
 subs = st.session_state.get("subscription_ids")
 
 with st.spinner("Loading data..."):
-    # Fetch actual costs (last 30 days) - CACHED
-    cost_data = cached_get_costs(subs, days=30)
+    cost_data, savings_data, data_source = get_latest_scan_data()
     
-    # Fetch savings recommendations - CACHED
-    savings_data = cached_get_savings_summary(subs)
+    if cost_data:
+        st.success(f"📦 Using cached scan data. {data_source}")
+    else:
+        # Fallback to live API (slower)
+        st.warning("⏳ No recent scan found. Fetching live data (this may take a while)...")
+        cost_data = cached_get_costs(subs, days=30)
+        data_source = "Live API"
+        # Only call live savings API if no cached scan data
+        savings_data = cached_get_savings_summary(subs) or {}
+    
+    # Ensure savings_data is not None
+    savings_data = savings_data or {}
     
     # Calculate totals
-    total_spend = cost_data.get("total", 0.0)
+    total_spend = cost_data.get("total", 0.0) if cost_data else 0.0
     total_savings = savings_data.get("total_potential_monthly_savings", 0.0)
     total_recs = savings_data.get("total_recommendations", 0)
     savings_by_cat = savings_data.get("savings_by_category", {})
@@ -70,8 +130,10 @@ sub_costs = cost_data.get("subscriptions", [])
 if sub_costs:
     df_subs = pd.DataFrame(sub_costs)
     if not df_subs.empty and "cost" in df_subs.columns:
-        # Use subscription_name from API response if available (new), fallback to lookup
-        if "subscription_name" not in df_subs.columns:
+        # Use display_name from cached data, or subscription_name, or lookup
+        if "display_name" in df_subs.columns:
+            df_subs["subscription_name"] = df_subs["display_name"]
+        elif "subscription_name" not in df_subs.columns:
             try:
                 sub_name_map = get_subscription_name_map()
             except:

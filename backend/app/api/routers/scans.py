@@ -42,23 +42,63 @@ async def run_full_scan(scan_id: str):
     data = {}
     
     try:
-        # 1. Subscriptions
-        current_scan["current_stage"] = "Discovering Subscriptions..."
-        subs = await subscription_service.get_subscriptions()
-        data["total_subscriptions"] = len(subs)
-        current_scan["progress"] = 10
-        logger.info(f"Scan {scan_id}: Found {len(subs)} subscriptions")
+        # Determine Data Source
+        use_export = current_scan.get("mode") == "export"
         
-        # 2. Costs
-        current_scan["current_stage"] = "Fetching Costs..."
-        costs = await cost_service.get_subscription_costs(subs, days=30)
-        data["costs"] = costs
-        current_scan["progress"] = 40
-        logger.info(f"Scan {scan_id}: Costs fetched")
-        
-        # 3. Orphaned Resources
+        if use_export:
+             logger.info(f"Scan {scan_id}: Starting in EXPORT mode (Blob Storage)")
+             from ...services.export_service import cost_export_service
+             import asyncio
+             
+             # 1. Fetch & Parse Export (Offloaded to Thread to prevent blocking)
+             current_scan["current_stage"] = "Starting Export Download..."
+             current_scan["progress"] = 0
+             
+             def update_progress(percent, stage):
+                 current_scan["progress"] = percent
+                 current_scan["current_stage"] = stage
+             
+             # Run blocking download/parse in separate thread
+             export_data = await asyncio.to_thread(cost_export_service.get_latest_data, update_progress)
+             
+             # Map Export Data to Scan Schema
+             data["costs"] = {
+                 "total": export_data["total_cost"],
+                 "currency": export_data["currency"],
+                 "subscriptions": export_data["subscriptions"],
+                 "history": export_data["history"]
+             }
+             
+             # Extract Subscriptions from Export
+             subs_from_export = [s["subscription_id"] for s in export_data["subscriptions"]]
+             subs = subs_from_export
+             data["total_subscriptions"] = len(subs)
+             current_scan["progress"] = 90
+             current_scan["current_stage"] = "Finalizing..."
+             logger.info(f"Scan {scan_id}: Parsed {len(subs)} subscriptions from export")
+             
+        else:
+            # ORIGINAL LIVE MODE
+            # 1. Subscriptions
+            current_scan["current_stage"] = "Discovering Subscriptions (API)..."
+            subs = await subscription_service.get_subscriptions()
+            data["total_subscriptions"] = len(subs)
+            current_scan["progress"] = 10
+            logger.info(f"Scan {scan_id}: Found {len(subs)} subscriptions")
+            
+            # 2. Costs
+            current_scan["current_stage"] = "Fetching Costs (API)..."
+            costs = await cost_service.get_subscription_costs(subs, days=30)
+            data["costs"] = costs
+            current_scan["progress"] = 40
+            logger.info(f"Scan {scan_id}: Costs fetched")
+            
+        # 3. Orphaned Resources (Always checks live resources, as exports are cost-only usually)
+        # Note: We can pass the costs from export to orphaned service to calculate savings?
+        # Orphaned service fetches its own costs currently. 
         current_scan["current_stage"] = "Detecting Orphaned Resources..."
-        orthaned_issues = await orphaned_service.detect_orphaned_resources(subs)
+        orthaned_issues = await orphaned_service.detect_orphaned_resources(subs, zombie_days=0)
+
         data["orphaned"] = orthaned_issues
         current_scan["progress"] = 60
         logger.info(f"Scan {scan_id}: Orphaned resources detected")
@@ -111,17 +151,24 @@ async def run_full_scan(scan_id: str):
         logger.error(traceback.format_exc())
 
 @router.post("/start")
-async def start_scan(background_tasks: BackgroundTasks):
-    """Start a new background scan."""
+async def start_scan(background_tasks: BackgroundTasks, mode: str = "live"):
+    """
+    Start a new background scan.
+    mode: 'live' (default) or 'export' (from blob storage)
+    """
     global current_scan
     if current_scan["status"] == "running":
         return {"status": "error", "message": "Scan already in progress", "scan_id": current_scan["scan_id"]}
         
     scan_id = scan_service.create_scan_id()
+    
+    # Store mode in current scan state for UI visibility
+    current_scan["mode"] = mode
+    
     # Trigger background task
     background_tasks.add_task(run_full_scan, scan_id)
     
-    return {"status": "started", "scan_id": scan_id}
+    return {"status": "started", "scan_id": scan_id, "mode": mode}
 
 @router.get("/status")
 async def get_scan_status():
@@ -129,12 +176,12 @@ async def get_scan_status():
     return current_scan
 
 @router.get("/")
-async def list_scans():
+def list_scans():
     """List historical scans."""
     return scan_service.list_scans()
 
 @router.get("/{scan_id}")
-async def get_scan(scan_id: str):
+def get_scan(scan_id: str):
     """Get full data for a scan."""
     data = scan_service.load_scan(scan_id)
     if not data:

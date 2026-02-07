@@ -3,7 +3,7 @@ Azure Resource Graph Client.
 """
 
 from azure.mgmt.resourcegraph import ResourceGraphClient as AzureResourceGraphClient
-from azure.mgmt.resourcegraph.models import QueryRequest, QueryRequestOptions, ResultFormat
+from azure.mgmt.resourcegraph.models import QueryRequest, QueryRequestOptions
 from ..services.azure_auth import auth_service
 from ..utils.retry import retry_with_backoff
 from ..utils.logger import get_logger
@@ -40,9 +40,8 @@ class ResourceGraphClient:
         skip_token = None
         
         while True:
-            # Use proper QueryRequestOptions object
+            # Use proper QueryRequestOptions object (result_format defaults to objectArray)
             options = QueryRequestOptions(
-                result_format=ResultFormat.OBJECT_ARRAY,
                 skip_token=skip_token
             )
             
@@ -53,7 +52,8 @@ class ResourceGraphClient:
             )
             
             logger.debug(f"Executing ARG Query: {query[:100]}...")
-            response = self.client.resources(request)
+            import asyncio
+            response = await asyncio.to_thread(self.client.resources, request)
             
             if response.data:
                 all_results.extend(response.data)

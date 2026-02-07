@@ -4,7 +4,7 @@ Savings Dashboard Page.
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from services.api_client import cached_get_orphaned_resources, cached_get_advisor_recommendations, cached_get_underutilized_vms, get_subscription_name_map
+from services.api_client import api_client, cached_get_orphaned_resources, cached_get_advisor_recommendations, cached_get_underutilized_vms, get_subscription_name_map
 
 st.set_page_config(page_title="Savings Dashboard", page_icon="💰", layout="wide")
 st.title("💰 Savings Dashboard")
@@ -13,16 +13,32 @@ st.title("💰 Savings Dashboard")
 col_refresh, col_zombie, col_fast = st.columns([1, 2, 2])
 with col_refresh:
     if st.button("🔄 Refresh Data"):
+        # Force backend refresh to update memory cache (e.g. schema changes)
+        try:
+            with st.spinner("Refreshing backend data..."):
+                # Get current zombie setting or default
+                current_zombie = st.session_state.get("zombie_days_input", 90)
+                sub_ids = st.session_state.get("subscription_ids")
+                api_client.get_orphaned_resources(
+                    subscription_ids=sub_ids, 
+                    zombie_days=current_zombie, 
+                    force_refresh=True
+                )
+        except Exception as e:
+            st.warning(f"Backend refresh warning: {e}")
+            
+        # Clear Streamlit cache and rerun
         st.cache_data.clear()
         st.rerun()
 
 with col_zombie:
     zombie_days = st.selectbox(
         "Zombie Duration Threshold",
-        options=[30, 60, 90, 180, 365],
-        index=2,  # Default to 90 days
+        options=[0, 30, 60, 90, 180, 365],
+        index=3,  # Default to 90 days (0, 30, 60, 90 is index 3)
         help="Resources inactive longer than this threshold are flagged as zombies",
-        format_func=lambda x: f"{x} days"
+        format_func=lambda x: "All (Show all)" if x == 0 else f"{x} days",
+        key="zombie_days_input"
     )
 
 with col_fast:
@@ -37,22 +53,87 @@ include_underutilized_vms = st.session_state.get("enable_underutilized_vm_check"
 
 subs = st.session_state.get("subscription_ids")
 
-# Show progress during load
-progress_text = "Loading resources..."
-if include_costs:
-    progress_text = "Loading resources and fetching costs (this may take 30-60 seconds)..."
-if include_underutilized_vms:
-    progress_text = "Loading all data including VM metrics (this may take several minutes)..."
+# Helper to load scan data
+def get_cached_savings_data(zombie_days: int = 90):
+    """Check session state first, then try to load from scan.
+    Filters Old Snapshots by the zombie_days threshold.
+    """
+    def filter_by_zombie_days(issues, threshold):
+        """Filter resources by days_inactive threshold."""
+        filtered = []
+        for issue in issues:
+            # Filter Old Snapshots and Orphaned Disks
+            # Both now return 'days_inactive' from backend
+            if issue.get("issue_type") in ["Old Snapshot", "Orphaned Disk"]:
+                # If threshold is 0 ("Show All"), include everything
+                if threshold == 0:
+                    filtered.append(issue)
+                else:
+                    days = issue.get("days_inactive")
+                    # Include if days_inactive is None (unknown) or >= threshold
+                    if days is None or days >= threshold:
+                        filtered.append(issue)
+            else:
+                # Other issue types are always included
+                filtered.append(issue)
+        return filtered
+    
+    # Check session state cache
+    if "cached_savings_issues" in st.session_state:
+        last_zombie_days = st.session_state.get("last_zombie_days", 90)
+        
+        # If we have data for X days, we can answer queries for Y days where Y >= X
+        # But if user wants Y < X (e.g. 30 days but cache has 90), we need more data -> Invalid
+        if zombie_days < last_zombie_days:
+            # Cache is insufficient
+            return None, None
+            
+        # Apply zombie_days filter to cached data
+        issues = filter_by_zombie_days(st.session_state.cached_savings_issues, zombie_days)
+        return issues, "Cached (Session)"
+    
+    try:
+        scans = api_client.list_scans()
+        if scans:
+            latest = scans[0]
+            scan_data = api_client.get_scan_data(latest.get("scan_id"))
+            if scan_data:
+                orphaned = scan_data.get("orphaned", [])
+                advisor = scan_data.get("advisor", [])
+                # Combine issues
+                all_issues = orphaned + advisor
+                
+                # Check metadata if available, otherwise assume default 30
+                scan_zombie_days = scan_data.get("metadata", {}).get("zombie_days", 30)
+                
+                # Cache UNFILTERED data in session state
+                st.session_state.cached_savings_issues = all_issues
+                st.session_state.last_zombie_days = scan_zombie_days
+                
+                # If scan data covers the request
+                if zombie_days >= scan_zombie_days:
+                    filtered_issues = filter_by_zombie_days(all_issues, zombie_days)
+                    return filtered_issues, f"Scan: {latest.get('scan_id', '')[:8]}..."
+                else:
+                    # Scan data insufficient
+                    return None, None
+    except Exception as e:
+        st.warning(f"Could not load from scan: {e}")
+    return None, None
 
-with st.spinner(progress_text):
-    # Fetch data - CACHED
-    orphaned = cached_get_orphaned_resources(subs, zombie_days=zombie_days, include_costs=include_costs)
-    advisor = cached_get_advisor_recommendations(subs)
+# Show progress during load
+with st.spinner("Loading savings data..."):
+    all_issues, data_source = get_cached_savings_data(zombie_days=zombie_days)
     
-    # Only fetch underutilized VMs if enabled in main app settings
-    underutilized = cached_get_underutilized_vms(subs) if include_underutilized_vms else []
-    
-    all_issues = orphaned + advisor + underutilized
+    if all_issues is not None:
+        st.success(f"📦 Using cached scan data. {data_source}")
+    else:
+        # Fallback to live API (slower)
+        st.warning("⏳ No recent scan found. Fetching live data (this may take 30-60 seconds)...")
+        orphaned = cached_get_orphaned_resources(subs, zombie_days=zombie_days, include_costs=include_costs)
+        advisor = cached_get_advisor_recommendations(subs)
+        underutilized = cached_get_underutilized_vms(subs) if include_underutilized_vms else []
+        all_issues = orphaned + advisor + underutilized
 
 # Show indicator if VM check is enabled
 if include_underutilized_vms:
@@ -74,6 +155,10 @@ else:
         df["subscription_name"] = df["subscription_id"].apply(
             lambda x: sub_name_map.get(x, x[:8] + "...") if sub_name_map else x[:8] + "..."
         )
+        
+    # Ensure days_inactive column exists
+    if "days_inactive" not in df.columns:
+        df["days_inactive"] = None
     
     # Overview
     total_savings = df["potential_savings"].sum()
@@ -153,6 +238,38 @@ else:
             st.info("No data matches the current filters.")
 
     st.divider()
+    
+    # Cost by Issue Type Table
+    st.markdown("### 💵 Cost by Issue Type")
+    
+    if not filtered_df.empty:
+        # Group by issue type and calculate sum and count
+        issue_summary = filtered_df.groupby("issue_type").agg({
+            "potential_savings": "sum",
+            "resource_name": "count"
+        }).reset_index()
+        issue_summary.columns = ["Issue Type", "Total Savings ($)", "Count"]
+        issue_summary = issue_summary.sort_values("Total Savings ($)", ascending=False)
+        
+        # Add percentage column
+        total = issue_summary["Total Savings ($)"].sum()
+        issue_summary["% of Total"] = (issue_summary["Total Savings ($)"] / total * 100).round(1)
+        
+        st.dataframe(
+            issue_summary,
+            column_config={
+                "Issue Type": st.column_config.TextColumn("Issue Type", width="medium"),
+                "Total Savings ($)": st.column_config.NumberColumn("Total Cost ($)", format="$%.2f"),
+                "Count": st.column_config.NumberColumn("# of Issues", format="%d"),
+                "% of Total": st.column_config.NumberColumn("% of Total", format="%.1f%%")
+            },
+            use_container_width=True,
+            hide_index=True
+        )
+    else:
+        st.info("No data matches the current filters.")
+
+    st.divider()
 
     # Detailed Table
     st.markdown("### 📋 Detailed Recommendations")
@@ -172,12 +289,13 @@ else:
     
     st.dataframe(
         display_df,
-        column_order=["issue_type", "resource_name", "description", "potential_savings", "recommendation", "severity", "resource_group", "subscription_name"],
+        column_order=["issue_type", "resource_name", "description", "days_inactive", "potential_savings", "recommendation", "severity", "resource_group", "subscription_name"],
         column_config={
             "potential_savings": st.column_config.NumberColumn("Last Month Cost ($)", format="$%.2f"),
             "issue_type": "Category",
             "resource_name": "Resource",
             "description": "Issue",
+            "days_inactive": st.column_config.NumberColumn("Days Inactive", format="%d"),
             "recommendation": "Action",
             "severity": st.column_config.TextColumn("Severity"),
             "resource_group": "Resource Group",

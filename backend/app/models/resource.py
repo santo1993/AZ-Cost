@@ -42,3 +42,4 @@ class OptimizationIssue(BaseModel):
     description: str
     potential_savings: float
     recommendation: str
+    days_inactive: Optional[int] = None

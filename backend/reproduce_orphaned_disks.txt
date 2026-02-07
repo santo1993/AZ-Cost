@@ -1,0 +1,8 @@
+
+--- Testing Disks Query ---
+Found 128 orphaned disks
+Sample disk: {'id': '/subscriptions/164ce48c-b79b-469f-ae60-b22ec44db0ff/resourceGroups/baxazr-prod-apse-hrshared-TradeConnect-rg/providers/Microsoft.Compute/disks/AZAPSETRDCNT101-osdisk-cleanclone', 'name': 'AZAPSETRDCNT101-osdisk-cleanclone', 'type': 'microsoft.compute/disks', 'subscriptionId': '164ce48c-b79b-469f-ae60-b22ec44db0ff', 'resourceGroup': 'baxazr-prod-apse-hrshared-tradeconnect-rg', 'skuName': 'StandardSSD_LRS', 'diskSizeGB': 128, 'timeCreated': '2025-12-16T13:26:04.5916922Z'}
+
+--- Testing Snapshots Query ---
+Found 31 snapshots
+Sample snapshot: {'id': '/subscriptions/164ce48c-b79b-469f-ae60-b22ec44db0ff/resourceGroups/baxazr-prod-apse-hrshared-TradeConnect-rg/providers/Microsoft.Compute/snapshots/AZAPSETRDCNT101-osdisk-cleanclone-snapshot', 'name': 'AZAPSETRDCNT101-osdisk-cleanclone-snapshot', 'type': 'microsoft.compute/snapshots', 'subscriptionId': '164ce48c-b79b-469f-ae60-b22ec44db0ff', 'resourceGroup': 'baxazr-prod-apse-hrshared-tradeconnect-rg', 'diskSizeGB': 128, 'ageInDays': 53, 'timeCreated': '2025-12-16T13:23:12.2447548Z'}

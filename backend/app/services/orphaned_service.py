@@ -4,8 +4,9 @@ Includes actual cost data from Azure Cost Management.
 Calculates VM costs including attached disk storage costs.
 """
 
-from typing import List, Dict
+from typing import List, Dict, Any
 import asyncio
+import datetime
 from ..clients.resource_graph import resource_graph_client
 from ..models.resource import OptimizationIssue
 from ..config import get_settings
@@ -17,14 +18,13 @@ class OrphanedService:
     
     async def detect_orphaned_resources(self, subscription_ids: List[str] = None, include_costs: bool = True, zombie_days: int = 30) -> List[OptimizationIssue]:
         """
-        Detect orphaned and zombie resources across subscriptions using batch processing.
+        Detect orphaned and zombie resources across subscriptions using bulk querying.
         """
         settings = get_settings()
         
         # Build subscription name map
         from azure.mgmt.subscription import SubscriptionClient
         from .azure_auth import auth_service
-        from ..utils.batch import batch_process
         
         subs = subscription_ids
         if not subs:
@@ -45,63 +45,151 @@ class OrphanedService:
         except Exception as e:
             logger.warning(f"Could not fetch subscription names: {e}")
 
-        # Helper function for batch processing
-        async def process_sub(sub_id: str):
-             return await self._detect_for_subscription(sub_id, sub_name_map.get(sub_id, sub_id[:8]), include_costs, zombie_days)
-
-        logger.info(f"Scanning for orphaned resources in {len(subs)} subscriptions (batch processing)...")
-        results_nested = await batch_process(
-            subs,
-            process_sub,
-            batch_size=5,
-            delay_seconds=0.1 # Fast batching
-        )
+        # Chunk subscriptions
+        chunk_size = 50
+        chunks = [subs[i:i + chunk_size] for i in range(0, len(subs), chunk_size)]
         
-        # Flatten results
-        all_issues = [issue for sub_results in results_nested for issue in sub_results]
+        logger.info(f"Processing {len(subs)} subscriptions in {len(chunks)} chunks...")
+        
+        all_issues = []
+        for i, chunk in enumerate(chunks):
+            logger.info(f"Processing chunk {i+1}/{len(chunks)} ({len(chunk)} subs)...")
+            try:
+                issues = await self._detect_for_chunk(chunk, sub_name_map, include_costs, zombie_days)
+                all_issues.extend(issues)
+            except Exception as e:
+                logger.error(f"Error processing chunk {i}: {e}")
+                
         return all_issues
 
-    async def _detect_for_subscription(self, sub_id: str, sub_name: str, include_costs: bool, zombie_days: int) -> List[OptimizationIssue]:
+    async def _detect_for_chunk(self, subs: List[str], sub_name_map: Dict[str, str], include_costs: bool, zombie_days: int) -> List[OptimizationIssue]:
         """
-        Detect resources for a single subscription.
+        Detect resources for a chunk of subscriptions using parallel queries.
         """
         issues = []
-        try:
-            # Get resource costs if requested (per subscription now)
-            cost_map = {}
-            if include_costs:
-                try:
-                    from .cost_service import cost_service
-                    # We use get_costs_by_resource but ideally we should have a scoped cached version? 
-                    # Assuming cost_service handles caching correctly.
-                    # Note: calling this 75 times might flood if not careful, but cost_service uses cache
-                    cost_map = await cost_service.get_costs_by_resource([sub_id], days=30)
-                except Exception as e:
-                    logger.warning(f"Failed to fetch resource costs for {sub_id}: {e}")
+        
+        # Get resource costs if requested
+        cost_map = {}
+        if include_costs:
+            try:
+                from .cost_service import cost_service
+                cost_map = await cost_service.get_costs_by_resource(subs, days=30)
+            except Exception as e:
+                logger.warning(f"Failed to fetch resource costs for chunk: {e}")
 
-            # 1. Unattached Managed Disks
-            disks_query = """
-            Resources
-            | where type == "microsoft.compute/disks"
-            | where properties.diskState == "Unattached"
-            | project id, name, type, subscriptionId, resourceGroup, skuName = sku.name, diskSizeGB = properties.diskSizeGB, timeCreated = properties.timeCreated
-            """
-            disks = await resource_graph_client.query_resources(disks_query, subscriptions=[sub_id])
+        # Define Queries
+        
+        # 1. Disks
+        disk_time_filter = f"| where todatetime(properties.timeCreated) < ago({zombie_days}d)" if zombie_days > 0 else ""
+        disks_query = f"""
+        Resources
+        | where type == "microsoft.compute/disks"
+        | where properties.diskState == "Unattached"
+        {disk_time_filter}
+        | project id, name, type, subscriptionId, resourceGroup, skuName = sku.name, diskSizeGB = properties.diskSizeGB, timeCreated = properties.timeCreated
+        """
+        
+        # 2. PIPs
+        pip_query = """
+        Resources
+        | where type == "microsoft.network/publicipaddresses"
+        | where properties.ipConfiguration == ""
+        | project id, name, type, subscriptionId, resourceGroup
+        """
+        
+        # 3. All Disks (for VM cost calc)
+        all_disks_query = """
+        Resources
+        | where type == "microsoft.compute/disks"
+        | project id, name, diskSizeGB = properties.diskSizeGB, skuName = sku.name
+        """
+        
+        # 4. VMs
+        vm_query = """
+        Resources
+        | where type == "microsoft.compute/virtualmachines"
+        | extend powerState = tostring(properties.extended.instanceView.powerState.displayStatus)
+        | where powerState contains "deallocated" or powerState contains "stopped"
+        | project id, name, type, subscriptionId, resourceGroup, 
+                  vmSize = properties.hardwareProfile.vmSize,
+                  osDiskId = properties.storageProfile.osDisk.managedDisk.id,
+                  dataDisks = properties.storageProfile.dataDisks,
+                  statuses = properties.extended.instanceView.statuses
+        """
+        
+        # 5. Snapshots
+        snap_time_filter = f"| where ageInDays > {zombie_days}" if zombie_days > 0 else ""
+        snapshot_query = f"""
+        Resources
+        | where type == "microsoft.compute/snapshots"
+        | extend ageInDays = datetime_diff('day', now(), todatetime(properties.timeCreated))
+        {snap_time_filter}
+        | project id, name, type, subscriptionId, resourceGroup, diskSizeGB = properties.diskSizeGB, ageInDays
+        """
+        
+        # 6. Load Balancers
+        lb_query = """
+        Resources
+        | where type == "microsoft.network/loadbalancers"
+        | extend backendPoolCount = array_length(properties.backendAddressPools)
+        | extend hasBackendConfigs = isnotnull(properties.backendAddressPools[0].properties.backendIPConfigurations)
+        | where backendPoolCount == 0 or hasBackendConfigs == false
+        | project id, name, subscriptionId, resourceGroup, skuName = sku.name, skuTier = sku.tier
+        """
+        
+        # Execute queries in parallel
+        try:
+            results = await asyncio.gather(
+                resource_graph_client.query_resources(disks_query, subscriptions=subs),
+                resource_graph_client.query_resources(pip_query, subscriptions=subs),
+                resource_graph_client.query_resources(all_disks_query, subscriptions=subs),
+                resource_graph_client.query_resources(vm_query, subscriptions=subs),
+                resource_graph_client.query_resources(snapshot_query, subscriptions=subs),
+                resource_graph_client.query_resources(lb_query, subscriptions=subs),
+                return_exceptions=True
+            )
+            
+            disks_data, pips_data, all_disks_data, vms_data, snaps_data, lbs_data = results
+            
+            # Helper to check for exceptions
+            def get_data(res, name):
+                if isinstance(res, Exception):
+                    logger.error(f"Error querying {name}: {res}")
+                    return []
+                return res
+
+            disks = get_data(disks_data, "Disks")
+            pips = get_data(pips_data, "PIPs")
+            all_disks = get_data(all_disks_data, "All Disks")
+            vms = get_data(vms_data, "VMs")
+            snapshots = get_data(snaps_data, "Snapshots")
+            load_balancers = get_data(lbs_data, "Load Balancers")
+
+            # --- Process Disks ---
             for disk in disks:
+                sub_id = disk.get('subscriptionId', '')
+                sub_name = sub_name_map.get(sub_id, sub_id)
                 size_gb = disk.get('diskSizeGB', 0) or 0
                 resource_id = disk['id'].lower()
                 actual_cost = cost_map.get(resource_id, 0.0)
                 
-                # If no actual cost, estimate based on size and SKU
                 if actual_cost == 0 and size_gb > 0:
                     sku = disk.get('skuName', 'Standard_LRS')
-                    if 'Premium' in str(sku):
-                        actual_cost = size_gb * 0.15
-                    elif 'StandardSSD' in str(sku):
-                        actual_cost = size_gb * 0.08
-                    else:
-                        actual_cost = size_gb * 0.04
+                    if 'Premium' in str(sku): actual_cost = size_gb * 0.15
+                    elif 'StandardSSD' in str(sku): actual_cost = size_gb * 0.08
+                    else: actual_cost = size_gb * 0.04
                 
+                days_created = 0
+                if disk.get('timeCreated'):
+                    try:
+                        created_time = datetime.datetime.fromisoformat(disk['timeCreated'].replace('Z', '+00:00'))
+                        now_utc = datetime.datetime.now(datetime.timezone.utc)
+                        if created_time.tzinfo is None:
+                            created_time = created_time.replace(tzinfo=datetime.timezone.utc)
+                        days_created = (now_utc - created_time).days
+                    except:
+                        pass
+
                 issues.append(OptimizationIssue(
                     id=f"orphaned-disk-{disk['id']}",
                     resource_id=disk['id'],
@@ -112,20 +200,16 @@ class OrphanedService:
                     resource_group=disk['resourceGroup'],
                     issue_type="Orphaned Disk",
                     severity="High",
-                    description=f"Unattached Managed Disk ({size_gb} GB)",
+                    description=f"Unattached Managed Disk ({size_gb} GB) - created {days_created} days ago",
                     potential_savings=round(actual_cost, 2),
-                    recommendation="Delete the unattached disk or attach it to a VM."
+                    recommendation="Delete the unattached disk or attach it to a VM.",
+                    days_inactive=days_created
                 ))
 
-            # 2. Unattached Public IPs
-            pip_query = """
-            Resources
-            | where type == "microsoft.network/publicipaddresses"
-            | where properties.ipConfiguration == ""
-            | project id, name, type, subscriptionId, resourceGroup
-            """
-            pips = await resource_graph_client.query_resources(pip_query, subscriptions=[sub_id])
+            # --- Process PIPs ---
             for pip in pips:
+                sub_id = pip.get('subscriptionId', '')
+                sub_name = sub_name_map.get(sub_id, sub_id)
                 resource_id = pip['id'].lower()
                 actual_cost = cost_map.get(resource_id, 4.0)
                 
@@ -144,37 +228,19 @@ class OrphanedService:
                     recommendation="Delete the unattached Public IP."
                 ))
 
-            # 3. Deallocated VMs
-            all_disks_query = """
-            Resources
-            | where type == "microsoft.compute/disks"
-            | project id, name, diskSizeGB = properties.diskSizeGB, skuName = sku.name
-            """
-            try:
-                all_disks = await resource_graph_client.query_resources(all_disks_query, subscriptions=[sub_id])
-                disk_info = {}
-                for d in all_disks:
-                    disk_id = d['id'].lower()
-                    disk_info[disk_id] = {
-                        'size_gb': d.get('diskSizeGB', 0) or 0,
-                        'sku': d.get('skuName', 'Standard_LRS')
-                    }
-            except Exception:
-                disk_info = {}
-            
-            vm_query = """
-            Resources
-            | where type == "microsoft.compute/virtualmachines"
-            | extend powerState = tostring(properties.extended.instanceView.powerState.displayStatus)
-            | where powerState contains "deallocated" or powerState contains "stopped"
-            | project id, name, type, subscriptionId, resourceGroup, 
-                      vmSize = properties.hardwareProfile.vmSize,
-                      osDiskId = properties.storageProfile.osDisk.managedDisk.id,
-                      dataDisks = properties.storageProfile.dataDisks
-            """
-            vms = await resource_graph_client.query_resources(vm_query, subscriptions=[sub_id])
-            
+            # --- Process VMs ---
+            # Create disk lookup map
+            disk_info = {}
+            for d in all_disks:
+                disk_id = d['id'].lower()
+                disk_info[disk_id] = {
+                    'size_gb': d.get('diskSizeGB', 0) or 0,
+                    'sku': d.get('skuName', 'Standard_LRS')
+                }
+
             for vm in vms:
+                sub_id = vm.get('subscriptionId', '')
+                sub_name = sub_name_map.get(sub_id, sub_id)
                 resource_id = vm['id'].lower()
                 vm_size = vm.get('vmSize') or 'Unknown'
                 
@@ -212,6 +278,28 @@ class OrphanedService:
 
                 total_cost = os_disk_cost + data_disk_cost
                 
+                days_inactive = None
+                statuses = vm.get('statuses', [])
+                if statuses and isinstance(statuses, list):
+                    for status in statuses:
+                        code = status.get('code', '')
+                        if 'PowerState/deallocated' in code or 'PowerState/stopped' in code:
+                            time_str = status.get('time')
+                            if time_str:
+                                try:
+                                    time_str = time_str.split('.')[0].replace('Z', '+00:00')
+                                    deallocated_time = datetime.datetime.fromisoformat(time_str)
+                                    if deallocated_time.tzinfo is None:
+                                         deallocated_time = deallocated_time.replace(tzinfo=datetime.timezone.utc)
+                                    days_inactive = (datetime.datetime.now(datetime.timezone.utc) - deallocated_time).days
+                                except:
+                                    pass
+                                break
+
+                desc = f"Deallocated VM ({vm_size}) with {disk_count} disk(s)"
+                if days_inactive is not None:
+                    desc += f" - {days_inactive} days inactive"
+
                 issues.append(OptimizationIssue(
                     id=f"zombie-vm-{vm['id']}",
                     resource_id=vm['id'],
@@ -221,22 +309,17 @@ class OrphanedService:
                     subscription_name=sub_name,
                     resource_group=vm['resourceGroup'],
                     issue_type="Deallocated VM",
-                    severity="High",
-                    description=f"Deallocated VM ({vm_size}) with {disk_count} disk(s) - storage costs continue",
+                    severity="High" if (days_inactive and days_inactive > 30) else "Medium",
+                    description=desc,
                     potential_savings=round(total_cost, 2),
-                    recommendation="Delete or resize the VM if no longer needed. Consider snapshots for backup."
+                    recommendation="Delete or resize the VM if no longer needed. Consider snapshots for backup.",
+                    days_inactive=days_inactive
                 ))
-
-            # 4. Old Snapshots
-            snapshot_query = f"""
-            Resources
-            | where type == "microsoft.compute/snapshots"
-            | extend ageInDays = datetime_diff('day', now(), todatetime(properties.timeCreated))
-            | where ageInDays > {zombie_days}
-            | project id, name, type, subscriptionId, resourceGroup, diskSizeGB = properties.diskSizeGB, ageInDays
-            """
-            snapshots = await resource_graph_client.query_resources(snapshot_query, subscriptions=[sub_id])
+            
+            # --- Process Snapshots ---
             for snap in snapshots:
+                sub_id = snap.get('subscriptionId', '')
+                sub_name = sub_name_map.get(sub_id, sub_id)
                 resource_id = snap['id'].lower()
                 actual_cost = cost_map.get(resource_id, 0.0)
                 size_gb = snap.get('diskSizeGB') or 0
@@ -257,20 +340,14 @@ class OrphanedService:
                     severity="Medium",
                     description=f"Old Snapshot ({size_gb} GB) - {int(age_days)} days old",
                     potential_savings=round(actual_cost, 2),
-                    recommendation="Delete old snapshots that are no longer needed."
+                    recommendation="Delete old snapshots that are no longer needed.",
+                    days_inactive=int(age_days)
                 ))
 
-            # 5. Idle Load Balancers
-            lb_query = """
-            Resources
-            | where type == "microsoft.network/loadbalancers"
-            | extend backendPoolCount = array_length(properties.backendAddressPools)
-            | extend hasBackendConfigs = isnotnull(properties.backendAddressPools[0].properties.backendIPConfigurations)
-            | where backendPoolCount == 0 or hasBackendConfigs == false
-            | project id, name, subscriptionId, resourceGroup, skuName = sku.name, skuTier = sku.tier
-            """
-            load_balancers = await resource_graph_client.query_resources(lb_query, subscriptions=[sub_id])
+            # --- Process LBs ---
             for lb in load_balancers:
+                sub_id = lb.get('subscriptionId', '')
+                sub_name = sub_name_map.get(sub_id, sub_id)
                 resource_id = lb['id'].lower()
                 actual_cost = cost_map.get(resource_id, 0.0)
                 sku_name = lb.get('skuName') or 'Basic'
@@ -293,11 +370,9 @@ class OrphanedService:
                     potential_savings=round(actual_cost, 2),
                     recommendation="Delete the idle load balancer or configure backend pools."
                 ))
-                
+
         except Exception as e:
-            logger.error(f"Error processing subscription {sub_id} for orphans: {e}")
-            import traceback
-            logger.error(traceback.format_exc())
+            logger.error(f"Error executing parallel queries for chunk: {e}")
             
         return issues
 

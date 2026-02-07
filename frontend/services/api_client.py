@@ -24,6 +24,19 @@ class ApiClient:
             st.error(f"API Error ({endpoint}): {e}")
             return None
 
+    def _post(self, endpoint: str, json_data: Dict[str, Any] = None, timeout: int = 300) -> Any:
+        try:
+            url = f"{self.base_url}/api{endpoint}"
+            response = self.session.post(url, json=json_data, timeout=timeout)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.Timeout:
+            st.warning(f"Request timed out for {endpoint}. The backend might be busy.")
+            return {"status": "error", "message": "Request timed out"}
+        except requests.exceptions.RequestException as e:
+            st.error(f"API Error ({endpoint}): {e}")
+            return {"status": "error", "message": str(e)}
+
     def get_savings_summary(self, subscription_ids: Optional[str] = None) -> Dict[str, Any]:
         params = {}
         if subscription_ids:
@@ -42,8 +55,8 @@ class ApiClient:
             params["subscription_ids"] = subscription_ids
         return self._get("/advisor", params, timeout=60) or []
 
-    def get_orphaned_resources(self, subscription_ids: Optional[str] = None, zombie_days: int = 30, include_costs: bool = True) -> List[Dict[str, Any]]:
-        params = {"zombie_days": zombie_days, "include_costs": include_costs}
+    def get_orphaned_resources(self, subscription_ids: Optional[str] = None, zombie_days: int = 30, include_costs: bool = True, force_refresh: bool = False) -> List[Dict[str, Any]]:
+        params = {"zombie_days": zombie_days, "include_costs": include_costs, "force_refresh": force_refresh}
         if subscription_ids:
             params["subscription_ids"] = subscription_ids
         return self._get("/orphaned", params, timeout=90) or []
@@ -78,9 +91,9 @@ class ApiClient:
         return self._get("/costs/monthly-history", params, timeout=60) or {"months": [], "services": [], "data": []}
 
     # Scan Management
-    def start_scan(self) -> Dict[str, Any]:
-        """Trigger a new background scan."""
-        return self._post("/scans/start", timeout=10)
+    def start_scan(self, mode: str = "live") -> Dict[str, Any]:
+        """Trigger a new background scan (mode: 'live' or 'export')."""
+        return self._post(f"/scans/start?mode={mode}", timeout=10)
         
     def get_scan_status(self) -> Dict[str, Any]:
         """Get status of current running scan."""
@@ -88,11 +101,11 @@ class ApiClient:
         
     def list_scans(self) -> List[Dict[str, Any]]:
         """List historical scans."""
-        return self._get("/scans", timeout=10) or []
+        return self._get("/scans", timeout=120) or []
         
     def get_scan_data(self, scan_id: str) -> Dict[str, Any]:
         """Get full data for a specific scan."""
-        return self._get(f"/scans/{scan_id}", timeout=30)
+        return self._get(f"/scans/{scan_id}", timeout=120)
 
     def get_subscriptions(self) -> List[Dict[str, Any]]:
         """Get list of all subscriptions with names and IDs."""

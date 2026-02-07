@@ -11,7 +11,8 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
 
 # Assuming api_client is in a services directory
-from services import api_client
+# Import the instance, not the module
+from services.api_client import api_client
 
 # Page Config
 st.set_page_config(
@@ -20,6 +21,13 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Hide default Streamlit navigation
+st.markdown("""
+<style>
+    [data-testid="stSidebarNav"] {display: none;}
+</style>
+""", unsafe_allow_html=True)
 
 # Initialize Session State
 if 'subscription_ids' not in st.session_state:
@@ -43,22 +51,102 @@ This dashboard helps you identify cost savings opportunities in your Azure envir
 
 st.info("System is running in **Active Verification Mode** connects to backend at `http://localhost:8000`")
 
-# Advanced Options Section
-st.divider()
-st.subheader("⚙️ Advanced Scan Options")
-
-col1, col2 = st.columns([2, 3])
-with col1:
-    enable_vm_check = st.checkbox(
-        "Enable Underutilized VM Detection",
-        value=st.session_state.enable_underutilized_vm_check,
-        help="When enabled, Savings Dashboard will scan ALL VMs for low CPU utilization (<5%)"
-    )
-    st.session_state.enable_underutilized_vm_check = enable_vm_check
-
-with col2:
-    if enable_vm_check:
-        st.warning("⚠️ **VM scan enabled** - This will query Azure Monitor for each VM and may take several minutes depending on VM count. Results are cached after first scan.")
+# Sidebar Configuration
+with st.sidebar:
+    st.header("☁️ Azure Cost Dashboard")
+    st.markdown("---")
+    
+    # Navigation
+    st.page_link("app.py", label="Home", icon="🏠")
+    st.page_link("pages/1_🏠_Global_Dashboard.py", label="Global Dashboard", icon="📊")
+    st.page_link("pages/2_💰_Savings_Dashboard.py", label="Savings Dashboard", icon="💰")
+    st.page_link("pages/3_📊_Cost_History.py", label="Cost History", icon="📈")
+    
+    st.markdown("---")
+    
+    # ---------------------------
+    # DATA SOURCE CONTROL
+    # ---------------------------
+    st.subheader("Data Source")
+    
+    # Scan History Selector
+    scans = api_client.list_scans()
+    scan_options = {"Live/Cached Data": None}
+    for s in scans:
+        scan_id = s.get("scan_id")
+        timestamp = s.get("timestamp", "").replace("T", " ")[:16]
+        # Show mode in label
+        mode_label = "[EXP]" if s.get("mode") == "export" else "[API]"
+        label = f"{mode_label} {timestamp} ({s.get('total_subscriptions')} subs)"
+        scan_options[label] = scan_id
+        
+    selected_scan_label = st.selectbox("Select Snapshot", list(scan_options.keys()))
+    selected_scan_id = scan_options[selected_scan_label]
+    
+    if selected_scan_id:
+        st.session_state.scan_id = selected_scan_id
+        st.info(f"Viewing snapshot: {selected_scan_label}")
     else:
-        st.info("VM utilization scan is disabled. Enable to find VMs with low CPU usage.")
+        if 'scan_id' in st.session_state:
+            del st.session_state.scan_id
+    
+    st.markdown("### Sync New Data")
+    col1, col2 = st.columns(2)
+    
+    # Live Scan Button
+    with col1:
+        if st.button("🚀 Live API", help="Slow but fresh", use_container_width=True):
+             try:
+                 response = api_client.start_scan(mode="live")
+                 if response and response.get("status") == "started":
+                     st.session_state.scanning = True
+                     st.session_state.scan_job_id = response.get("scan_id")
+                     st.success("Started!")
+                     st.rerun()
+             except Exception as e:
+                st.error(f"Err: {e}")
+
+    # Export Sync Button
+    with col2:
+        if st.button("📦 From CSV", help="Fast (Blob Storage)", type="primary", use_container_width=True):
+             try:
+                 response = api_client.start_scan(mode="export")
+                 if response and response.get("status") == "started":
+                     st.session_state.scanning = True
+                     st.session_state.scan_job_id = response.get("scan_id")
+                     st.success("Started!")
+                     st.rerun()
+             except Exception as e:
+                st.error(f"Err: {e}")
+
+    # Progress Bar with Auto-Refresh
+    if st.session_state.get("scanning"):
+        status = api_client.get_scan_status()
+        if status:
+            progress = status.get("progress", 0)
+            stage = status.get("current_stage", "Processing...")
+            job_status = status.get("status")
+            
+            st.progress(progress / 100, text=f"{stage} ({progress}%)")
+            
+            if job_status == "completed":
+                st.session_state.scanning = False
+                st.success("Scan completed!")
+                time.sleep(1)
+                st.rerun()
+            elif job_status == "failed":
+                st.session_state.scanning = False
+                st.error(f"Failed: {status.get('error')}")
+            else:
+                # Still running - auto-refresh every 2 seconds
+                time.sleep(2)
+                st.rerun()
+
+    st.markdown("---")
+    st.markdown("### Settings")
+    
+    if st.checkbox("Include Underutilized VMs (slow)", value=st.session_state.get("enable_underutilized_vm_check", False)):
+        st.session_state.enable_underutilized_vm_check = True
+    else:
+        st.session_state.enable_underutilized_vm_check = False
 

@@ -1,0 +1,6 @@
+
+--- Testing Disks Query ---
+Error querying disks: name 'disks_query' is not defined
+
+--- Testing Snapshots Query ---
+Error querying snapshots: name 'snapshot_query' is not defined

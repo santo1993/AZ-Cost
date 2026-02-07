@@ -45,6 +45,12 @@ class Settings(BaseSettings):
         le=24,
         description="Cache TTL in hours (1-24)"
     )
+
+    # Azure Cost Export (Storage)
+    azure_storage_account_url: Optional[str] = Field(default=None)
+    azure_storage_container: Optional[str] = Field(default=None)
+    azure_storage_sas_token: Optional[str] = Field(default=None)
+    azure_cost_export_path: Optional[str] = Field(default=None)
     
     # Server Settings
     backend_host: str = Field(default="0.0.0.0")
@@ -93,3 +99,10 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     """Get cached settings instance."""
     return Settings()
+
+def clear_settings_cache():
+    """Clear the settings cache to reload from .env."""
+    get_settings.cache_clear()
+
+# Clear cache on module import to ensure fresh settings when uvicorn reloads
+clear_settings_cache()
