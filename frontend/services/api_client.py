@@ -90,7 +90,7 @@ class ApiClient:
              params["subscription_ids"] = subscription_ids
         return self._get("/costs/monthly-history", params, timeout=180) or {"months": [], "services": [], "data": []}
 
-    # Scan Management
+        # Scan Management
     def start_scan(self, mode: str = "live") -> Dict[str, Any]:
         """Trigger a new background scan (mode: 'live' or 'export')."""
         return self._post(f"/scans/start?mode={mode}", timeout=10)

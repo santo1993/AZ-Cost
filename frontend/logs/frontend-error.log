@@ -1,0 +1,1285 @@
+2026-02-09 09:34:45.089 200 GET / (10.137.3.39) 1.33ms
+2026-02-09 09:34:45.158 200 GET /static/css/index.BUP6fTcR.css (10.137.3.39) 2.23ms
+2026-02-09 09:34:45.162 200 GET /static/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2 (10.137.3.39) 44.55ms
+2026-02-09 09:34:45.242 200 GET /static/js/index.Drusyo5m.js (10.137.3.39) 122.63ms
+2026-02-09 09:34:45.394 200 GET /_stcore/health (10.137.3.39) 2.19ms
+2026-02-09 09:34:45.396 200 GET /_stcore/host-config (10.137.3.39) 0.42ms
+2026-02-09 09:34:45.410 200 GET /favicon.png (10.137.3.39) 1.05ms
+2026-02-09 09:34:45.413 101 GET /_stcore/stream (10.137.3.39) 1.06ms
+2026-02-09 09:34:45.542 200 GET /static/media/MaterialSymbols-Rounded.C7IFxh57.woff2 (10.137.3.39) 3.93ms
+2026-02-09 09:34:45.807 200 GET /static/js/index.YYb2u0jk.js (10.137.3.39) 52.35ms
+2026-02-09 09:34:46.325 200 GET /static/js/index.bsVAaBS1.js (10.137.3.39) 516.04ms
+2026-02-09 09:34:46.331 200 GET /static/js/index.FsTmxLbT.js (10.137.3.39) 3.26ms
+2026-02-09 09:34:46.335 200 GET /static/media/SourceCodeVF-Upright.ttf.BjWn63N-.woff2 (10.137.3.39) 6.15ms
+2026-02-09 09:34:46.339 200 GET /static/js/index.C6bmbXk0.js (10.137.3.39) 2.05ms
+2026-02-09 09:34:46.343 200 GET /static/js/iconPosition.B4EEXI3E.js (10.137.3.39) 5.39ms
+2026-02-09 09:34:46.362 200 GET /static/js/index.B0pzzCsH.js (10.137.3.39) 2.42ms
+2026-02-09 09:34:46.365 200 GET /static/js/useBasicWidgetState.DFklfao0.js (10.137.3.39) 1.05ms
+2026-02-09 09:34:46.369 200 GET /static/js/FormClearHelper.C__r5Llk.js (10.137.3.39) 1.15ms
+2026-02-09 09:34:46.383 200 GET /static/js/index.CV1sObFX.js (10.137.3.39) 1.31ms
+2026-02-09 09:34:46.386 200 GET /static/js/index.-FOBV3nz.js (10.137.3.39) 1.14ms
+2026-02-09 09:34:46.389 200 GET /static/js/WidgetLabelHelpIconInline.DEXBrVlc.js (10.137.3.39) 1.19ms
+2026-02-09 09:34:46.395 200 GET /static/js/checkbox.BKgfzJZV.js (10.137.3.39) 6.49ms
+2026-02-09 09:34:51.852 200 GET /static/js/formatNumber.CMRgW9EJ.js (10.137.3.39) 3.12ms
+2026-02-09 09:34:51.865 200 GET /static/js/value.DaKxGC7O.js (10.137.3.39) 14.99ms
+2026-02-09 09:34:51.942 200 GET /static/js/embed.u3PPfLkw.js (10.137.3.39) 88.07ms
+2026-02-09 09:34:51.947 200 GET /static/js/timer.BZio6gjG.js (10.137.3.39) 92.47ms
+2026-02-09 09:34:51.957 200 GET /static/js/threshold.CUNQbqMA.js (10.137.3.39) 102.89ms
+2026-02-09 09:34:51.969 200 GET /static/js/index.D7SWG4Om.js (10.137.3.39) 114.03ms
+2026-02-09 09:34:51.990 200 GET /static/js/numbro.B9_PXfzp.js (10.137.3.39) 8.27ms
+2026-02-09 09:34:51.995 200 GET /static/js/sprintf.DpPCfzXw.js (10.137.3.39) 12.12ms
+2026-02-09 09:34:52.615 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:34:52.637 200 GET /static/js/index.Cq6szKqJ.js (10.137.3.39) 3.49ms
+2026-02-09 09:34:52.668 200 GET /static/js/pandasStylerUtils.B4tLYMwS.js (10.137.3.39) 26.76ms
+2026-02-09 09:34:52.676 200 GET /static/js/moment.C7qA8nIE.js (10.137.3.39) 34.62ms
+2026-02-09 09:34:52.712 200 GET /static/js/index.s_E0s7LB.js (10.137.3.39) 70.63ms
+2026-02-09 09:34:52.717 200 GET /static/js/withFullScreenWrapper.DfpAcJxf.js (10.137.3.39) 75.41ms
+2026-02-09 09:34:52.723 200 GET /static/js/Toolbar.BHDNzWBx.js (10.137.3.39) 80.96ms
+2026-02-09 09:34:52.729 200 GET /static/js/_baseIndexOf.BTknn6Gb.js (10.137.3.39) 2.48ms
+2026-02-09 09:34:52.737 200 GET /static/js/index.8HslT92O.js (10.137.3.39) 9.42ms
+2026-02-09 09:34:52.751 200 GET /static/js/main.D_CmqChN.js (10.137.3.39) 23.28ms
+2026-02-09 09:34:52.755 200 GET /static/js/throttle.Cyw_V0Dq.js (10.137.3.39) 27.18ms
+2026-02-09 09:34:52.758 200 GET /static/js/toConsumableArray.gE9fMkLj.js (10.137.3.39) 30.55ms
+2026-02-09 09:34:52.763 200 GET /static/css/index.DgR7E2CV.css (10.137.3.39) 2.82ms
+2026-02-09 09:34:52.769 200 GET /static/js/formatMoment.C6Hwn6X5.js (10.137.3.39) 3.50ms
+2026-02-09 09:34:52.775 200 GET /static/js/createDownloadLinkElement.CG7nr2a4.js (10.137.3.39) 8.50ms
+2026-02-09 09:34:52.781 200 GET /static/js/FileDownload.esm.AllYUuOW.js (10.137.3.39) 15.10ms
+2026-02-09 09:34:52.787 200 GET /static/js/_arrayIncludes.B19Iyn2B.js (10.137.3.39) 20.13ms
+2026-02-09 09:34:52.791 200 GET /static/js/TableChart.esm.D6ydHcIm.js (10.137.3.39) 24.16ms
+2026-02-09 09:34:52.846 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:34:52.872 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:34:54.145 200 GET /static/js/index.Dncue2pm.js (10.137.3.39) 318.51ms
+2026-02-09 09:34:54.171 200 GET /static/js/index.h8ejt-W3.js (10.137.3.39) 1.36ms
+2026-02-09 09:34:54.176 200 GET /static/js/ProgressBar.DLCRvt4m.js (10.137.3.39) 2.33ms
+2026-02-09 09:49:03.758 Malformed HTTP message from 10.170.224.205: Malformed HTTP request line
+2026-02-09 09:49:04.342 Malformed HTTP message from 10.170.224.205: no colon in header line
+2026-02-09 09:49:18.072 200 GET / (10.170.224.205) 1.18ms
+2026-02-09 09:49:18.735 200 GET /static/css/index.BUP6fTcR.css (10.170.224.205) 1.87ms
+2026-02-09 09:49:19.660 200 GET /static/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2 (10.170.224.205) 956.00ms
+2026-02-09 09:49:19.883 200 GET /static/js/index.Drusyo5m.js (10.170.224.205) 1177.74ms
+2026-02-09 09:49:20.470 200 GET /_stcore/health (10.170.224.205) 0.90ms
+2026-02-09 09:49:20.472 200 GET /_stcore/host-config (10.170.224.205) 0.47ms
+2026-02-09 09:49:20.547 200 GET /favicon.png (10.170.224.205) 0.94ms
+2026-02-09 09:49:21.051 101 GET /_stcore/stream (10.170.224.205) 1.11ms
+2026-02-09 09:49:22.431 200 GET /static/js/index.C6bmbXk0.js (10.170.224.205) 2.19ms
+2026-02-09 09:49:22.442 200 GET /static/js/index.YYb2u0jk.js (10.170.224.205) 13.03ms
+2026-02-09 09:49:22.445 200 GET /static/js/index.bsVAaBS1.js (10.170.224.205) 15.60ms
+2026-02-09 09:49:22.447 200 GET /static/media/SourceCodeVF-Upright.ttf.BjWn63N-.woff2 (10.170.224.205) 14.41ms
+2026-02-09 09:49:22.451 200 GET /static/js/index.FsTmxLbT.js (10.170.224.205) 17.34ms
+2026-02-09 09:49:22.956 200 GET /static/js/iconPosition.B4EEXI3E.js (10.170.224.205) 1.10ms
+2026-02-09 09:49:22.972 200 GET /static/js/index.B0pzzCsH.js (10.170.224.205) 1.13ms
+2026-02-09 09:49:22.980 200 GET /static/js/useBasicWidgetState.DFklfao0.js (10.170.224.205) 0.99ms
+2026-02-09 09:49:23.193 200 GET /static/js/FormClearHelper.C__r5Llk.js (10.170.224.205) 1.13ms
+2026-02-09 09:49:23.480 200 GET /static/js/index.CV1sObFX.js (10.170.224.205) 1.16ms
+2026-02-09 09:49:23.509 200 GET /static/js/WidgetLabelHelpIconInline.DEXBrVlc.js (10.170.224.205) 1.15ms
+2026-02-09 09:49:23.512 200 GET /static/js/index.-FOBV3nz.js (10.170.224.205) 0.98ms
+2026-02-09 09:49:23.672 200 GET /static/js/checkbox.BKgfzJZV.js (10.170.224.205) 1.43ms
+2026-02-09 09:49:23.680 200 GET /static/media/MaterialSymbols-Rounded.C7IFxh57.woff2 (10.170.224.205) 1251.40ms
+2026-02-09 09:49:28.973 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:49:29.000 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:49:29.009 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:49:29.345 200 GET /static/js/index.D7SWG4Om.js (10.170.224.205) 1.41ms
+2026-02-09 09:49:29.349 200 GET /static/js/value.DaKxGC7O.js (10.170.224.205) 1.36ms
+2026-02-09 09:49:29.353 200 GET /static/js/formatNumber.CMRgW9EJ.js (10.170.224.205) 1.50ms
+2026-02-09 09:49:29.356 200 GET /static/js/threshold.CUNQbqMA.js (10.170.224.205) 4.74ms
+2026-02-09 09:49:29.403 200 GET /static/js/embed.u3PPfLkw.js (10.170.224.205) 51.24ms
+2026-02-09 09:49:29.406 200 GET /static/js/timer.BZio6gjG.js (10.170.224.205) 54.77ms
+2026-02-09 09:49:29.893 200 GET /static/css/index.DgR7E2CV.css (10.170.224.205) 1.41ms
+2026-02-09 09:49:29.896 200 GET /static/js/sprintf.DpPCfzXw.js (10.170.224.205) 0.95ms
+2026-02-09 09:49:29.901 200 GET /static/js/numbro.B9_PXfzp.js (10.170.224.205) 2.43ms
+2026-02-09 09:49:29.909 200 GET /static/js/index.Cq6szKqJ.js (10.170.224.205) 1.29ms
+2026-02-09 09:49:29.921 200 GET /static/js/withFullScreenWrapper.DfpAcJxf.js (10.170.224.205) 1.14ms
+2026-02-09 09:49:29.933 200 GET /static/js/Toolbar.BHDNzWBx.js (10.170.224.205) 1.21ms
+2026-02-09 09:49:30.439 200 GET /static/js/index.s_E0s7LB.js (10.170.224.205) 23.26ms
+2026-02-09 09:49:30.445 200 GET /static/js/moment.C7qA8nIE.js (10.170.224.205) 4.00ms
+2026-02-09 09:49:30.448 200 GET /static/js/_baseIndexOf.BTknn6Gb.js (10.170.224.205) 6.49ms
+2026-02-09 09:49:30.463 200 GET /static/js/pandasStylerUtils.B4tLYMwS.js (10.170.224.205) 20.83ms
+2026-02-09 09:49:30.468 200 GET /static/js/index.8HslT92O.js (10.170.224.205) 2.35ms
+2026-02-09 09:49:30.475 200 GET /static/js/main.D_CmqChN.js (10.170.224.205) 9.49ms
+2026-02-09 09:49:30.949 200 GET /static/js/throttle.Cyw_V0Dq.js (10.170.224.205) 1.15ms
+2026-02-09 09:49:30.965 200 GET /static/js/toConsumableArray.gE9fMkLj.js (10.170.224.205) 1.12ms
+2026-02-09 09:49:30.973 200 GET /static/js/formatMoment.C6Hwn6X5.js (10.170.224.205) 1.05ms
+2026-02-09 09:49:30.976 200 GET /static/js/createDownloadLinkElement.CG7nr2a4.js (10.170.224.205) 0.91ms
+2026-02-09 09:49:30.993 200 GET /static/js/FileDownload.esm.AllYUuOW.js (10.170.224.205) 1.12ms
+2026-02-09 09:49:31.009 200 GET /static/js/_arrayIncludes.B19Iyn2B.js (10.170.224.205) 1.08ms
+2026-02-09 09:49:31.473 200 GET /static/js/TableChart.esm.D6ydHcIm.js (10.170.224.205) 1.11ms
+2026-02-09 09:49:31.517 200 GET /static/js/index.h8ejt-W3.js (10.170.224.205) 1.18ms
+2026-02-09 09:49:31.520 200 GET /static/js/ProgressBar.DLCRvt4m.js (10.170.224.205) 3.81ms
+2026-02-09 09:49:32.415 200 GET /static/js/index.Dncue2pm.js (10.170.224.205) 927.06ms
+2026-02-09 09:49:38.363 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:49:38.390 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:49:38.399 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:51:19.517 200 GET /Global_Dashboard (10.170.224.205) 1.33ms
+2026-02-09 09:51:20.243 200 GET /static/css/index.BUP6fTcR.css (10.170.224.205) 1.80ms
+2026-02-09 09:51:21.091 200 GET /static/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2 (10.170.224.205) 923.78ms
+2026-02-09 09:51:21.393 200 GET /static/js/index.Drusyo5m.js (10.170.224.205) 1180.63ms
+2026-02-09 09:51:22.239 404 GET /Global_Dashboard/_stcore/health (10.170.224.205) 2.19ms
+2026-02-09 09:51:22.241 404 GET /Global_Dashboard/_stcore/host-config (10.170.224.205) 0.67ms
+2026-02-09 09:51:23.266 200 GET /favicon.png (10.170.224.205) 0.97ms
+2026-02-09 09:51:23.387 200 GET /_stcore/health (10.170.224.205) 0.90ms
+2026-02-09 09:51:23.656 200 GET /_stcore/host-config (10.170.224.205) 0.57ms
+2026-02-09 09:51:24.490 101 GET /_stcore/stream (10.170.224.205) 1.10ms
+2026-02-09 09:51:24.932 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:51:24.958 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:51:24.966 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:51:25.872 200 GET /static/js/index.CV1sObFX.js (10.170.224.205) 1.88ms
+2026-02-09 09:51:25.875 200 GET /static/js/iconPosition.B4EEXI3E.js (10.170.224.205) 4.34ms
+2026-02-09 09:51:25.951 200 GET /static/js/index.D7SWG4Om.js (10.170.224.205) 1.32ms
+2026-02-09 09:51:25.981 200 GET /static/js/threshold.CUNQbqMA.js (10.170.224.205) 1.24ms
+2026-02-09 09:51:26.334 200 GET /static/media/MaterialSymbols-Rounded.C7IFxh57.woff2 (10.170.224.205) 464.53ms
+2026-02-09 09:51:26.470 200 GET /static/css/index.DgR7E2CV.css (10.170.224.205) 1.37ms
+2026-02-09 09:51:26.521 200 GET /static/js/timer.BZio6gjG.js (10.170.224.205) 1.38ms
+2026-02-09 09:51:26.525 200 GET /static/js/value.DaKxGC7O.js (10.170.224.205) 1.39ms
+2026-02-09 09:51:26.527 200 GET /static/js/WidgetLabelHelpIconInline.DEXBrVlc.js (10.170.224.205) 0.83ms
+2026-02-09 09:51:26.638 200 GET /static/js/formatNumber.CMRgW9EJ.js (10.170.224.205) 1.15ms
+2026-02-09 09:51:26.889 200 GET /static/js/embed.u3PPfLkw.js (10.170.224.205) 935.18ms
+2026-02-09 09:51:26.995 200 GET /static/js/numbro.B9_PXfzp.js (10.170.224.205) 2.69ms
+2026-02-09 09:51:27.037 200 GET /static/js/sprintf.DpPCfzXw.js (10.170.224.205) 1.26ms
+2026-02-09 09:51:27.045 200 GET /static/js/index.Cq6szKqJ.js (10.170.224.205) 1.39ms
+2026-02-09 09:51:27.049 200 GET /static/js/withFullScreenWrapper.DfpAcJxf.js (10.170.224.205) 1.01ms
+2026-02-09 09:51:27.146 200 GET /static/js/Toolbar.BHDNzWBx.js (10.170.224.205) 1.20ms
+2026-02-09 09:51:27.464 200 GET /static/js/index.s_E0s7LB.js (10.170.224.205) 23.48ms
+2026-02-09 09:51:27.505 200 GET /static/js/FormClearHelper.C__r5Llk.js (10.170.224.205) 1.15ms
+2026-02-09 09:51:27.548 200 GET /static/js/moment.C7qA8nIE.js (10.170.224.205) 3.66ms
+2026-02-09 09:51:27.578 200 GET /static/js/pandasStylerUtils.B4tLYMwS.js (10.170.224.205) 12.37ms
+2026-02-09 09:51:27.582 200 GET /static/js/_baseIndexOf.BTknn6Gb.js (10.170.224.205) 1.04ms
+2026-02-09 09:51:27.667 200 GET /static/js/index.8HslT92O.js (10.170.224.205) 2.34ms
+2026-02-09 09:51:27.975 200 GET /static/js/main.D_CmqChN.js (10.170.224.205) 5.83ms
+2026-02-09 09:51:28.018 200 GET /static/js/throttle.Cyw_V0Dq.js (10.170.224.205) 1.18ms
+2026-02-09 09:51:28.057 200 GET /static/js/toConsumableArray.gE9fMkLj.js (10.170.224.205) 1.14ms
+2026-02-09 09:51:28.101 200 GET /static/js/formatMoment.C6Hwn6X5.js (10.170.224.205) 1.12ms
+2026-02-09 09:51:28.114 200 GET /static/js/checkbox.BKgfzJZV.js (10.170.224.205) 1.45ms
+2026-02-09 09:51:28.178 200 GET /static/js/createDownloadLinkElement.CG7nr2a4.js (10.170.224.205) 1.12ms
+2026-02-09 09:51:28.483 200 GET /static/js/FileDownload.esm.AllYUuOW.js (10.170.224.205) 1.13ms
+2026-02-09 09:51:28.529 200 GET /static/js/_arrayIncludes.B19Iyn2B.js (10.170.224.205) 1.10ms
+2026-02-09 09:51:28.565 200 GET /static/js/TableChart.esm.D6ydHcIm.js (10.170.224.205) 1.15ms
+2026-02-09 09:51:28.636 200 GET /static/js/index.h8ejt-W3.js (10.170.224.205) 1.08ms
+2026-02-09 09:51:28.698 200 GET /static/js/ProgressBar.DLCRvt4m.js (10.170.224.205) 1.53ms
+2026-02-09 09:51:29.762 200 GET /static/js/index.Dncue2pm.js (10.170.224.205) 1154.43ms
+2026-02-09 09:52:12.420 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:12.447 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:12.456 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:15.862 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:15.874 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:15.878 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:15.916 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 09:52:16.789 200 GET /static/js/index.B0pzzCsH.js (10.170.224.205) 2.63ms
+2026-02-09 09:52:16.792 200 GET /static/js/useBasicWidgetState.DFklfao0.js (10.170.224.205) 5.09ms
+2026-02-09 09:52:16.795 200 GET /static/js/index.-NF8OSF5.js (10.170.224.205) 8.36ms
+2026-02-09 09:52:16.798 200 GET /static/js/index.-FOBV3nz.js (10.170.224.205) 10.31ms
+2026-02-09 09:52:16.802 200 GET /static/js/index.Dzw2iPzi.js (10.170.224.205) 14.56ms
+2026-02-09 09:52:16.805 200 GET /static/js/index.CEfKfbta.js (10.170.224.205) 17.58ms
+2026-02-09 09:52:17.317 200 GET /static/js/InputInstructions.DOtkdOMV.js (10.170.224.205) 1.98ms
+2026-02-09 09:52:17.321 200 GET /static/js/useUpdateUiValue.ClTdrkJN.js (10.170.224.205) 1.84ms
+2026-02-09 09:52:17.340 200 GET /static/js/inputUtils.CptNuJwn.js (10.170.224.205) 1.32ms
+2026-02-09 09:52:17.394 200 GET /static/js/uniqueId.B1GeHnT1.js (10.170.224.205) 1.32ms
+2026-02-09 09:52:17.399 200 GET /static/js/input.BLG7kWaj.js (10.170.224.205) 2.70ms
+2026-02-09 09:52:17.405 200 GET /static/js/base-input.TSQjctlq.js (10.170.224.205) 2.52ms
+2026-02-09 09:52:17.832 200 GET /static/media/SourceCodeVF-Upright.ttf.BjWn63N-.woff2 (10.170.224.205) 1.06ms
+2026-02-09 09:52:17.836 200 GET /static/js/index.CbR6dgaV.js (10.170.224.205) 1.86ms
+2026-02-09 09:52:18.404 200 GET /media/8d7c4f5f35b3a0ad592d45127bd51fe4d287944f770627f3f2aa937f.csv (10.170.224.205) 6.56ms
+2026-02-09 09:52:30.896 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:30.904 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:30.910 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:30.940 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 09:52:31.845 200 GET /static/js/index.-NF8OSF5.js (10.170.224.205) 2.21ms
+2026-02-09 09:52:31.848 200 GET /static/js/index.CEfKfbta.js (10.170.224.205) 5.18ms
+2026-02-09 09:52:31.851 200 GET /static/js/inputUtils.CptNuJwn.js (10.170.224.205) 7.82ms
+2026-02-09 09:52:31.853 200 GET /static/js/useUpdateUiValue.ClTdrkJN.js (10.170.224.205) 9.78ms
+2026-02-09 09:52:31.856 200 GET /static/js/InputInstructions.DOtkdOMV.js (10.170.224.205) 12.15ms
+2026-02-09 09:52:31.859 200 GET /static/js/index.Dzw2iPzi.js (10.170.224.205) 15.05ms
+2026-02-09 09:52:32.407 200 GET /static/js/uniqueId.B1GeHnT1.js (10.170.224.205) 1.10ms
+2026-02-09 09:52:32.411 200 GET /static/js/input.BLG7kWaj.js (10.170.224.205) 1.33ms
+2026-02-09 09:52:32.414 200 GET /static/js/base-input.TSQjctlq.js (10.170.224.205) 4.42ms
+2026-02-09 09:52:32.439 200 GET /static/js/index.CbR6dgaV.js (10.170.224.205) 1.16ms
+2026-02-09 09:52:32.979 200 GET /media/8d7c4f5f35b3a0ad592d45127bd51fe4d287944f770627f3f2aa937f.csv (10.170.224.205) 5.77ms
+2026-02-09 09:52:47.032 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:47.058 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:47.066 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:50.976 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:50.984 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:50.990 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:52:51.017 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 09:52:51.560 304 GET /media/8d7c4f5f35b3a0ad592d45127bd51fe4d287944f770627f3f2aa937f.csv (10.170.224.205) 0.55ms
+2026-02-09 09:53:52.951 200 GET /static/js/withCalculatedWidth.Dxs9I5Oe.js (10.170.224.205) 1.39ms
+2026-02-09 09:53:52.957 200 GET /static/js/index.CIuaA8q0.js (10.170.224.205) 3.21ms
+2026-02-09 09:53:53.230 200 GET /static/js/index.4cBg8kn5.js (10.170.224.205) 2.20ms
+2026-02-09 09:54:02.226 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:54:02.252 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:54:02.260 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:54:36.557 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:54:36.582 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:54:36.590 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:54:54.222 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:54:54.247 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:54:54.255 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:07.183 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:07.191 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:07.195 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:07.225 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 09:57:07.893 304 GET /media/8d7c4f5f35b3a0ad592d45127bd51fe4d287944f770627f3f2aa937f.csv (10.170.224.205) 0.59ms
+2026-02-09 09:57:26.217 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:26.242 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:26.249 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:27.263 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:27.288 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:27.295 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:43.247 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:43.255 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:43.260 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:57:43.288 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 09:57:43.937 304 GET /media/8d7c4f5f35b3a0ad592d45127bd51fe4d287944f770627f3f2aa937f.csv (10.170.224.205) 0.52ms
+2026-02-09 09:58:04.818 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:58:04.843 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:58:04.851 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:58:23.731 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:58:23.739 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:58:23.744 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:58:23.774 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 09:58:24.910 304 GET /media/8d7c4f5f35b3a0ad592d45127bd51fe4d287944f770627f3f2aa937f.csv (10.170.224.205) 0.52ms
+2026-02-09 09:58:46.285 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:58:46.310 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:58:46.317 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:59:01.702 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:59:01.710 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:59:01.714 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 09:59:01.743 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 09:59:35.986 304 GET / (10.170.224.205) 0.78ms
+2026-02-09 09:59:36.438 304 GET /_stcore/health (10.170.224.205) 0.77ms
+2026-02-09 09:59:36.744 304 GET /_stcore/host-config (10.170.224.205) 0.51ms
+2026-02-09 09:59:53.399 304 GET /_stcore/health (10.170.224.205) 0.78ms
+2026-02-09 09:59:53.401 304 GET /_stcore/host-config (10.170.224.205) 0.34ms
+2026-02-09 09:59:53.981 101 GET /_stcore/stream (10.170.224.205) 1.09ms
+2026-02-09 10:00:02.854 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:00:02.881 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:00:02.889 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:00:04.631 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:00:04.656 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:00:04.664 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:02:58.433 304 GET / (10.170.224.205) 0.72ms
+2026-02-09 10:02:58.937 304 GET /_stcore/host-config (10.170.224.205) 0.54ms
+2026-02-09 10:02:58.940 304 GET /_stcore/health (10.170.224.205) 0.66ms
+2026-02-09 10:02:59.548 101 GET /_stcore/stream (10.170.224.205) 1.08ms
+2026-02-09 10:03:10.973 304 GET / (10.170.224.205) 0.82ms
+2026-02-09 10:03:11.404 304 GET /_stcore/host-config (10.170.224.205) 0.53ms
+2026-02-09 10:03:11.407 304 GET /_stcore/health (10.170.224.205) 0.64ms
+2026-02-09 10:03:11.998 101 GET /_stcore/stream (10.170.224.205) 1.04ms
+2026-02-09 10:09:01.079 304 GET / (10.170.224.205) 0.88ms
+2026-02-09 10:09:01.545 304 GET /_stcore/health (10.170.224.205) 0.83ms
+2026-02-09 10:09:01.817 304 GET /_stcore/host-config (10.170.224.205) 0.51ms
+2026-02-09 10:09:02.393 101 GET /_stcore/stream (10.170.224.205) 1.01ms
+2026-02-09 10:09:39.484 304 GET / (10.170.224.205) 0.76ms
+2026-02-09 10:09:39.912 304 GET /_stcore/health (10.170.224.205) 0.81ms
+2026-02-09 10:09:39.914 304 GET /_stcore/host-config (10.170.224.205) 0.35ms
+2026-02-09 10:09:40.495 101 GET /_stcore/stream (10.170.224.205) 1.04ms
+2026-02-09 10:19:43.244 304 GET / (10.170.224.205) 0.69ms
+2026-02-09 10:19:43.705 304 GET /_stcore/health (10.170.224.205) 0.82ms
+2026-02-09 10:19:43.978 304 GET /_stcore/host-config (10.170.224.205) 0.49ms
+2026-02-09 10:19:44.559 101 GET /_stcore/stream (10.170.224.205) 1.05ms
+2026-02-09 10:19:48.121 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:19:50.034 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:20:50.172 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:20:58.492 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 10:21:11.911 200 GET /static/js/index.CIuaA8q0.js (10.170.224.205) 2.58ms
+2026-02-09 10:21:11.914 200 GET /static/js/withCalculatedWidth.Dxs9I5Oe.js (10.170.224.205) 0.91ms
+2026-02-09 10:38:40.550 304 GET / (10.170.224.95) 0.74ms
+2026-02-09 10:38:41.013 304 GET /_stcore/health (10.170.224.95) 0.79ms
+2026-02-09 10:38:41.288 304 GET /_stcore/host-config (10.170.224.95) 0.54ms
+2026-02-09 10:38:41.908 101 GET /_stcore/stream (10.170.224.95) 1.08ms
+2026-02-09 11:01:05.181 200 GET / (10.251.2.233) 1.17ms
+2026-02-09 11:01:05.453 200 GET /static/css/index.BUP6fTcR.css (10.251.2.233) 1.68ms
+2026-02-09 11:01:05.755 200 GET /static/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2 (10.251.2.233) 342.36ms
+2026-02-09 11:01:06.117 200 GET /static/js/index.Drusyo5m.js (10.251.2.233) 589.60ms
+2026-02-09 11:01:06.628 200 GET /_stcore/host-config (10.251.2.233) 0.56ms
+2026-02-09 11:01:06.632 200 GET /favicon.png (10.251.2.233) 0.80ms
+2026-02-09 11:01:06.635 200 GET /_stcore/health (10.251.2.233) 0.65ms
+2026-02-09 11:01:06.919 101 GET /_stcore/stream (10.251.2.233) 1.05ms
+2026-02-09 11:01:08.093 200 GET /static/js/index.C6bmbXk0.js (10.251.2.233) 1.75ms
+2026-02-09 11:01:08.096 200 GET /static/js/index.FsTmxLbT.js (10.251.2.233) 1.53ms
+2026-02-09 11:01:08.099 200 GET /static/media/SourceCodeVF-Upright.ttf.BjWn63N-.woff2 (10.251.2.233) 4.00ms
+2026-02-09 11:01:08.101 200 GET /static/js/index.bsVAaBS1.js (10.251.2.233) 6.32ms
+2026-02-09 11:01:08.112 200 GET /static/js/index.YYb2u0jk.js (10.251.2.233) 16.52ms
+2026-02-09 11:01:08.360 200 GET /static/js/iconPosition.B4EEXI3E.js (10.251.2.233) 1.11ms
+2026-02-09 11:01:08.363 200 GET /static/js/useBasicWidgetState.DFklfao0.js (10.251.2.233) 1.08ms
+2026-02-09 11:01:08.366 200 GET /static/js/index.B0pzzCsH.js (10.251.2.233) 3.54ms
+2026-02-09 11:01:08.378 200 GET /static/js/FormClearHelper.C__r5Llk.js (10.251.2.233) 1.14ms
+2026-02-09 11:01:08.485 200 GET /static/js/index.CV1sObFX.js (10.251.2.233) 1.17ms
+2026-02-09 11:01:08.542 200 GET /static/media/MaterialSymbols-Rounded.C7IFxh57.woff2 (10.251.2.233) 451.66ms
+2026-02-09 11:01:08.649 200 GET /static/js/index.-FOBV3nz.js (10.251.2.233) 1.17ms
+2026-02-09 11:01:08.657 200 GET /static/js/WidgetLabelHelpIconInline.DEXBrVlc.js (10.251.2.233) 0.97ms
+2026-02-09 11:01:08.666 200 GET /static/js/checkbox.BKgfzJZV.js (10.251.2.233) 1.28ms
+2026-02-09 11:01:32.985 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:01:33.012 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:01:40.534 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:01:40.561 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:01:47.760 200 GET /static/js/index.4cBg8kn5.js (10.170.224.95) 1.17ms
+2026-02-09 11:02:19.260 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:02:19.285 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:03:30.628 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:03:30.655 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:03:32.356 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:03:32.383 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:03:34.239 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:03:34.272 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:03:37.343 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:03:37.369 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:35:03.447 304 GET / (10.170.224.218) 0.75ms
+2026-02-09 11:35:03.924 304 GET /_stcore/health (10.170.224.218) 0.83ms
+2026-02-09 11:35:04.198 304 GET /_stcore/host-config (10.170.224.218) 0.53ms
+2026-02-09 11:35:04.772 101 GET /_stcore/stream (10.170.224.218) 1.10ms
+2026-02-09 11:38:49.921 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:38:49.948 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:38:49.956 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:39:13.700 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:39:13.709 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:39:13.714 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:39:13.776 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 11:39:14.688 200 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 6.19ms
+2026-02-09 11:40:48.876 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:40:48.884 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:40:48.889 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:40:48.948 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 379, in <module>
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 57, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-02-09 11:40:49.465 304 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 0.54ms
+2026-02-09 11:43:27.689 200 GET /Savings_Dashboard (10.170.224.218) 1.52ms
+2026-02-09 11:43:28.297 404 GET /Savings_Dashboard/_stcore/health (10.170.224.218) 1.05ms
+2026-02-09 11:43:28.619 404 GET /Savings_Dashboard/_stcore/host-config (10.170.224.218) 0.93ms
+2026-02-09 11:43:28.704 304 GET /_stcore/health (10.170.224.218) 0.82ms
+2026-02-09 11:43:28.976 304 GET /_stcore/host-config (10.170.224.218) 0.52ms
+2026-02-09 11:43:29.548 101 GET /_stcore/stream (10.170.224.218) 1.08ms
+2026-02-09 11:43:30.205 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:43:30.214 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:43:30.218 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:43:32.528 304 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 0.56ms
+2026-02-09 11:43:32.534 200 GET /media/2c1c0f75deaaa8deb95d93a28ae4a1c151e63ef7f19c14b4ad88c2c7 (10.170.224.218) 0.56ms
+2026-02-09 11:44:53.729 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:44:53.820 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:45:44.059 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:45:44.088 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:45:44.096 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:45:50.187 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:45:50.196 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:45:50.200 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:45:50.974 200 GET /media/497e2c5da41ee001f4400e58e0bda1639d3141df034cf01cc00ec241 (10.170.224.218) 1.05ms
+2026-02-09 11:45:50.979 304 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 0.39ms
+2026-02-09 11:46:00.965 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:46:00.994 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:46:01.012 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:46:58.358 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:46:58.367 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:46:58.372 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:46:58.994 304 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 0.56ms
+2026-02-09 11:46:59.156 200 GET /media/946d3b2986f246e0fedada57457ac696ee06c9a47a1d43d60601cf0a (10.170.224.218) 0.73ms
+2026-02-09 11:47:38.116 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:38.141 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:38.149 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:40.446 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:40.455 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:40.462 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:40.977 304 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 0.57ms
+2026-02-09 11:47:41.181 200 GET /media/714e35fadf4a2ac95f313e81aa1684f796174cf66a16285c1fcd7b0d (10.170.224.218) 0.76ms
+2026-02-09 11:47:43.757 200 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 7.18ms
+2026-02-09 11:47:43.798 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:43.805 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:43.810 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:47:44.525 200 GET /media/b0c244939f16f517b4b15d50ae0041062392ba6f828648d00cc740ee (10.170.224.218) 0.78ms
+2026-02-09 11:48:28.815 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:48:28.840 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:48:28.848 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:54:37.408 304 GET /_stcore/health (10.170.224.218) 0.90ms
+2026-02-09 11:54:41.235 304 GET /_stcore/host-config (10.170.224.218) 0.44ms
+2026-02-09 11:54:44.046 404 GET /Savings_Dashboard/_stcore/health (10.170.224.218) 0.98ms
+2026-02-09 11:54:44.101 404 GET /Savings_Dashboard/_stcore/host-config (10.170.224.218) 0.95ms
+2026-02-09 11:54:45.905 200 GET /_stcore/health (10.170.224.218) 1.05ms
+2026-02-09 11:54:45.914 200 GET /_stcore/host-config (10.170.224.218) 0.39ms
+2026-02-09 11:54:46.802 101 GET /_stcore/stream (10.170.224.218) 1.56ms
+2026-02-09 11:56:04.047 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:04.056 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:04.061 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:05.304 304 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 0.54ms
+2026-02-09 11:56:05.613 200 GET /media/000b80b520dcf50f7e952cb233ccb31b63ae2d6ea6a65da5d743da5f (10.170.224.218) 0.73ms
+2026-02-09 11:56:05.902 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:05.910 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:05.915 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:07.538 200 GET /media/710561498f258e7947c29dd102bb959f102709e30bef9d9717cc424f.csv (10.170.224.218) 6.43ms
+2026-02-09 11:56:07.541 200 GET /media/8c9cf0c90a9f4a2241ec4704df80581ba18c58f0a6df82bb37b9ac34 (10.170.224.218) 0.57ms
+2026-02-09 11:56:10.738 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:10.747 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:10.755 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:11.279 304 GET /media/ad319a5227eeff32ef4ebd3b1d85d0a06a9c919a7064a050c0254536.csv (10.170.224.218) 0.57ms
+2026-02-09 11:56:11.451 200 GET /media/1e58d711d650dc881661e928d09c5c6ee085ba255bbb04c4758a82bc (10.170.224.218) 0.77ms
+2026-02-09 11:56:13.308 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:13.319 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:13.323 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:14.050 200 GET /media/89ca8dee037c5a4ed5af843d4243867c3d6f4a318807b64d82f3cd03 (10.170.224.218) 0.74ms
+2026-02-09 11:56:14.058 200 GET /media/a2df1865f5608555c9cfc2a530d4cdc7974e947913ffa8602a8d7c44.csv (10.170.224.218) 5.76ms
+2026-02-09 11:56:15.277 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:15.285 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:15.290 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:15.884 200 GET /media/e7b9e9a294851af5ae8964bbbda1721a677acf9d978c70b55e2fa968.csv (10.170.224.218) 5.78ms
+2026-02-09 11:56:15.983 200 GET /media/faeb6852809b13f8094c513a064672b5bc626e4e0bd72b997edbbb64 (10.170.224.218) 0.73ms
+2026-02-09 11:56:17.330 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:17.339 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:17.343 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:56:17.971 304 GET /media/710561498f258e7947c29dd102bb959f102709e30bef9d9717cc424f.csv (10.170.224.218) 0.57ms
+2026-02-09 11:56:18.048 200 GET /media/ba70a400623111d3a40e3055360b63f37b578567587612cd62ffa8d9 (10.170.224.218) 0.74ms
+2026-02-09 11:58:27.841 304 GET /Savings_Dashboard (10.170.224.218) 0.84ms
+2026-02-09 11:58:28.368 404 GET /Savings_Dashboard/_stcore/health (10.170.224.218) 0.96ms
+2026-02-09 11:58:28.372 404 GET /Savings_Dashboard/_stcore/host-config (10.170.224.218) 0.65ms
+2026-02-09 11:58:28.803 304 GET /_stcore/health (10.170.224.218) 0.83ms
+2026-02-09 11:58:28.805 304 GET /_stcore/host-config (10.170.224.218) 0.38ms
+2026-02-09 11:58:29.415 101 GET /_stcore/stream (10.170.224.218) 1.04ms
+2026-02-09 11:58:29.881 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:58:29.890 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:58:29.894 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:58:32.080 200 GET /media/f02683c29d0127844bb5a0f3e74ebf413bc81dd3d212807fb54063fe (10.170.224.218) 0.87ms
+2026-02-09 11:58:32.084 304 GET /media/710561498f258e7947c29dd102bb959f102709e30bef9d9717cc424f.csv (10.170.224.218) 0.46ms
+2026-02-09 11:59:29.308 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:59:29.317 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:59:29.323 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-02-09 11:59:29.871 304 GET /media/710561498f258e7947c29dd102bb959f102709e30bef9d9717cc424f.csv (10.170.224.218) 0.55ms
+2026-02-09 11:59:30.050 200 GET /media/00fee2dfd5aa0a3396183d35ade12ef39aaca0ace25e2122501a0ac7 (10.170.224.218) 0.79ms
+2026-02-09 12:12:56.519 304 GET / (10.170.224.218) 0.77ms
+2026-02-09 12:12:57.006 304 GET /_stcore/health (10.170.224.218) 0.84ms
+2026-02-09 12:12:57.292 304 GET /_stcore/host-config (10.170.224.218) 0.54ms
+2026-02-09 12:12:57.869 101 GET /_stcore/stream (10.170.224.218) 1.04ms
+2026-02-09 12:12:58.188 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\app.py", line 15, in <module>
+    from services.api_client import api_client
+  File "C:\Project\AZ-Cost\frontend\services\api_client.py", line 28
+    try:
+    ^^^
+IndentationError: expected an indented block after function definition on line 27
+2026-02-09 12:13:05.478 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\1_\U0001f3e0_Global_Dashboard.py", line 6, in <module>
+    from services.api_client import api_client, cached_get_costs, cached_get_savings_summary, get_subscription_name_map
+  File "C:\Project\AZ-Cost\frontend\services\api_client.py", line 28
+    try:
+    ^^^
+IndentationError: expected an indented block after function definition on line 27
+2026-02-09 12:13:07.369 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\2_\U0001f4b0_Savings_Dashboard.py", line 7, in <module>
+    from services.api_client import api_client, cached_get_orphaned_resources, cached_get_advisor_recommendations, cached_get_underutilized_vms, get_subscription_name_map
+  File "C:\Project\AZ-Cost\frontend\services\api_client.py", line 28
+    try:
+    ^^^
+IndentationError: expected an indented block after function definition on line 27
+2026-02-09 12:13:09.183 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\pages\3_\U0001f4ca_Cost_History.py", line 7, in <module>
+    from services.api_client import api_client, cached_get_monthly_cost_history
+  File "C:\Project\AZ-Cost\frontend\services\api_client.py", line 28
+    try:
+    ^^^
+IndentationError: expected an indented block after function definition on line 27
+2026-02-09 12:13:10.207 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 687, in code_to_exec
+    _mpa_v1(self._main_script_path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 166, in _mpa_v1
+    page.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\site-packages\streamlit\navigation\page.py", line 310, in run
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Project\AZ-Cost\frontend\app.py", line 15, in <module>
+    from services.api_client import api_client
+  File "C:\Project\AZ-Cost\frontend\services\api_client.py", line 28
+    try:
+    ^^^
+IndentationError: expected an indented block after function definition on line 27

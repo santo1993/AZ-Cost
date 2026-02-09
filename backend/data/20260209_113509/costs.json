@@ -1,0 +1,534 @@
+{
+  "subscriptions": [
+    {
+      "subscription_id": "71db3e04-059c-4c2e-ac06-ba6b41355b1c",
+      "cost": 8846.08,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Clinical Lakehouse Platform Dev/Test"
+    },
+    {
+      "subscription_id": "cc0c0b4b-45bb-4b0f-9c2d-51f0774e6b0f",
+      "cost": 0.0,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "DHP Production - Canada"
+    },
+    {
+      "subscription_id": "adec54a7-1a1a-41ed-af67-e036f9b105c6",
+      "cost": 3661.87,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "BDHP Enterprise Connectivity Tooling"
+    },
+    {
+      "subscription_id": "8300904c-1aa6-41d8-b99f-92dd3a858ae4",
+      "cost": 286.83,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Connected Care Cloud Operations - Production"
+    },
+    {
+      "subscription_id": "5ebe07e2-bfc1-45b5-9872-4eba149900e9",
+      "cost": 10904.84,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Clinical Lakehouse Platform Prod"
+    },
+    {
+      "subscription_id": "a9552cc3-38a9-42ae-b4e3-4d6d6fdefc0c",
+      "cost": 3412.28,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "BDHP Enterprise Connectivity DevOps Sandbox"
+    },
+    {
+      "subscription_id": "8af08461-efe0-4949-acd5-3b55769bbcb6",
+      "cost": 691.34,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Lakehouse Governed Analytics"
+    },
+    {
+      "subscription_id": "af8cff68-2e9e-4464-a71b-e4245d263d2b",
+      "cost": 26449.2,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Clinical Lakehouse Platform Exploratory"
+    },
+    {
+      "subscription_id": "65f99f85-8141-4a48-9816-6a3374abb2c1",
+      "cost": 15159.58,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "BDHP Enterprise Connectivity Production"
+    },
+    {
+      "subscription_id": "70c39f02-8ad9-45e9-82f3-f841e430f92b",
+      "cost": 0.0,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "BDHP Enterprise Connectivity Production - SG"
+    },
+    {
+      "subscription_id": "cbc24727-f44a-4a19-8b73-73d4519a1683",
+      "cost": 431.83,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Connected Care Cloud Operations - Dev / Test"
+    },
+    {
+      "subscription_id": "3af95d23-dbfc-480d-bba8-fdb027f1fb6d",
+      "cost": 140.83,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Connecta Dev Test"
+    },
+    {
+      "subscription_id": "c127c1d8-871e-4b20-a003-d072b81a22f3",
+      "cost": 134642.89,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "BDHP Enterprise Connectivity Development/Test"
+    },
+    {
+      "subscription_id": "f43af8e2-84c5-4e8d-8f8f-48accb9c22a5",
+      "cost": 384.28,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "HillRom-External-VisiView-DEV-APAC"
+    },
+    {
+      "subscription_id": "d0bef254-50a1-492c-9ec8-93e868643128",
+      "cost": 58.82,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "HillRom-External-VisiView-prod-NA"
+    },
+    {
+      "subscription_id": "d3fae248-f1e3-427c-ba72-11b8930097b5",
+      "cost": 360.52,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "HillRom-External-Hub"
+    },
+    {
+      "subscription_id": "598827ff-a3a3-47d5-b5de-eeca4b0d8b01",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-Shared-Dev-APAC"
+    },
+    {
+      "subscription_id": "164ce48c-b79b-469f-ae60-b22ec44db0ff",
+      "cost": 8039.47,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Hill-Rom-Shared-Prod-APAC"
+    },
+    {
+      "subscription_id": "4d4ca136-398a-4647-93d2-bcf72e587c3e",
+      "cost": 36613.55,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Hill-Rom-Shared-dev-EMEA"
+    },
+    {
+      "subscription_id": "a468293c-cbd7-4aa4-932b-b8eac3b62ada",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-Shared-Prod-EMEA"
+    },
+    {
+      "subscription_id": "ca7b389a-4f6a-4b03-a165-c4326bbcbb93",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-E-Data-Warehouse-dev-NA"
+    },
+    {
+      "subscription_id": "5b3f960a-8854-48bd-8c59-1d7320781a0f",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-Shared-dev-NA"
+    },
+    {
+      "subscription_id": "bf5e1814-6bc0-42d6-b6a3-1246f40bece0",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-Veritas-dev-NA"
+    },
+    {
+      "subscription_id": "dff37ba9-9990-46cc-ba42-585183c7564a",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Microsoft 365 Archive Billing - Hillrom"
+    },
+    {
+      "subscription_id": "92a767b6-bcc3-4303-abc5-12dc6e240c74",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-Shared-Prod-NA"
+    },
+    {
+      "subscription_id": "091bdb4f-a449-4933-adae-33a41f2aad9f",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-E-Data-Warehouse-prod-NA"
+    },
+    {
+      "subscription_id": "e3d5bb03-f5bb-4ac4-aab9-18525221eba3",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Patient Support Systems (PSS)"
+    },
+    {
+      "subscription_id": "b87199c2-34b2-4131-baf0-c07cfc088d20",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Baxter-FLC-Dev"
+    },
+    {
+      "subscription_id": "7e89122d-968f-4a0a-a243-b8c59f296565",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Microsoft 365 Archive Billing"
+    },
+    {
+      "subscription_id": "9d434cac-9373-47cc-b022-55009fe50099",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Care Communications Production"
+    },
+    {
+      "subscription_id": "2b6942a9-9c2a-4f90-ada9-4301ebc8e20f",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Care Communications Development"
+    },
+    {
+      "subscription_id": "2a260a5e-ccea-40e5-bdcd-d4c6013107f5",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Care Communications Ohana Production"
+    },
+    {
+      "subscription_id": "858f9e80-b3eb-4129-8f49-c33cc0653b1e",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "SOC 2 Compliant - Hill-Rom Production"
+    },
+    {
+      "subscription_id": "81861fb5-b7ab-4d0a-b5de-441793cc787e",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Care Communications Test"
+    },
+    {
+      "subscription_id": "bd6450e7-11d5-45e4-95d0-46ddeb041850",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Welch Allyn R&D DevOps"
+    },
+    {
+      "subscription_id": "22038e98-ff20-45ae-9b7f-cb8757d43d47",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "TrumpfMedical-GSS-RND-Dev-EMEA"
+    },
+    {
+      "subscription_id": "9f5f1576-0655-411c-847c-45b1c6812759",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Early Innovation R&D"
+    },
+    {
+      "subscription_id": "cb113d94-910e-41ad-889d-eb670f1f40e4",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Visual Studio Enterprise Subscription"
+    },
+    {
+      "subscription_id": "adb52691-cbde-4203-875c-62fd48205a72",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hillrom-External-ProductConfigurator-NA"
+    },
+    {
+      "subscription_id": "d16e63ca-0401-481e-b28f-b0e517c5da33",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "GSS RnD Applications"
+    },
+    {
+      "subscription_id": "70757880-453b-436f-a072-a9b7d69c4456",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Mortara-Engineering-dev-MIX"
+    },
+    {
+      "subscription_id": "efdf7c9a-f062-49b1-a915-60c9709afde4",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "TrumpfMedical-GSS-RND-Prod-EMEA"
+    },
+    {
+      "subscription_id": "a1c514b1-98ec-4691-b090-e112174cc1f9",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Welch Allyn RetinaVue-Service"
+    },
+    {
+      "subscription_id": "08ab5130-938c-4502-a505-382651a52287",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "BardyDx-External-Dev"
+    },
+    {
+      "subscription_id": "b20d13fd-7104-401d-a639-1b732213f8d2",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Welch Allyn - R&D VS"
+    },
+    {
+      "subscription_id": "4947b0b4-418f-4ff0-8af4-ff21b58d3333",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-Central-Product-Security"
+    },
+    {
+      "subscription_id": "33e21b23-d7e0-48f3-bb29-59d2a861d697",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "CHTSS Homedeploy"
+    },
+    {
+      "subscription_id": "c709a4c9-0c42-4ff1-8f33-4fd378da11fb",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "BardyDx-External-Prod"
+    },
+    {
+      "subscription_id": "041c1989-319c-4902-9f78-8b2794ddd570",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "R&D Infrastructure"
+    },
+    {
+      "subscription_id": "0c887e36-52bd-4dbe-8a9e-b8d83f972b54",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "CWS BusApps"
+    },
+    {
+      "subscription_id": "93d97f51-be1c-49ae-af70-be0103cd315f",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hillrom-External-Mathworks-NA"
+    },
+    {
+      "subscription_id": "6cd419ac-f4aa-4316-98c3-fe8fe5ce5d33",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Marcin's Visual Studio Enterprise"
+    },
+    {
+      "subscription_id": "64401b3f-578e-4f55-b5fb-30811dec271c",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Welch Allyn RetinaVue-Dev"
+    },
+    {
+      "subscription_id": "95113408-79bd-4ae6-9bc7-320a6bb66f7f",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "WelchAllyn-R&D-General-Dev"
+    },
+    {
+      "subscription_id": "5887219f-d6bf-4436-8b6b-fa639cecc360",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "WelchAllyn-RnD-General2-dev-NA"
+    },
+    {
+      "subscription_id": "56255ff8-63ef-475e-9faa-a257cd2318b7",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Visual Studio Professional Subscription B7"
+    },
+    {
+      "subscription_id": "de88973c-8984-44c8-8bfe-7b1f1441bb26",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "HillRom-EXTERNAL-Connecta-PROD-NA"
+    },
+    {
+      "subscription_id": "9fbb04ef-afea-4619-accf-8c4fa9dd07ab",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Welch Allyn RetinaVue Prod"
+    },
+    {
+      "subscription_id": "8123be27-c1ac-43e4-afa4-f8ce5b60cacb",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Hill-Rom-EA-Analytics-DEV"
+    },
+    {
+      "subscription_id": "455beda5-9415-4ca5-a371-514c4bc108ae",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Access to Azure Active Directory(Converted to EA)"
+    },
+    {
+      "subscription_id": "b5628690-e7e6-4449-b182-3d493e927a1d",
+      "cost": 0.0,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Visual Studio Professional Subscription"
+    },
+    {
+      "subscription_id": "1182e8fe-70a7-4f69-8119-e7d39204013e",
+      "cost": 487.42,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Microsoft Azure Enterprise"
+    },
+    {
+      "subscription_id": "0244de3c-60c1-4108-a120-9da5568ccef6",
+      "cost": 822.88,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "WelchAllyn-External-RetinaeVueOUS-dev-NA"
+    },
+    {
+      "subscription_id": "cfb9e745-fcb5-48b1-89ff-d5d856e4c3d6",
+      "cost": 0.0,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Visual Studio Professional"
+    },
+    {
+      "subscription_id": "0e696cc2-917f-4143-9bf3-c87b89e6a1df",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Visual Studio Enterprise(Converted to EA)"
+    },
+    {
+      "subscription_id": "df59fe3d-b1b2-4b03-a247-598d76174426",
+      "cost": 0.0,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Visual Studio Enterprise"
+    },
+    {
+      "subscription_id": "893b8f0f-580b-4023-af5d-3717ac0fc191",
+      "cost": 10253.36,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "WelchAllyn-Engineering-dev-NA"
+    },
+    {
+      "subscription_id": "47171060-19d8-4dce-aa35-4e91de7758a1",
+      "cost": 258.18,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Visual Studio Ultimate with MSDN - SteveMorrow"
+    },
+    {
+      "subscription_id": "81cb9346-fb86-470c-acab-0d6c19a5f3df",
+      "cost": 0.0,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Pay-As-You-Go"
+    },
+    {
+      "subscription_id": "7b4e60b2-f6a6-47e3-9446-8467d914fbc2",
+      "cost": 0.0,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Microsoft Azure SQL Server"
+    },
+    {
+      "subscription_id": "70a113f0-94a0-4bce-8352-4b6131d623d8",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Welch Allyn EMR Connectivity"
+    },
+    {
+      "subscription_id": "4dca6c54-a822-4f3e-8c14-c4b93df30ee9",
+      "cost": 36.25,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Visual Studio Enterprise"
+    },
+    {
+      "subscription_id": "3ca095f5-db3f-44ca-b92b-01819aa8a3d6",
+      "cost": 0.55,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "L-HR-Security-Tools"
+    },
+    {
+      "subscription_id": "3b0ac1be-9780-4ad9-8248-0587d9df4d98",
+      "cost": 0.0,
+      "currency": "USD",
+      "period_days": 30,
+      "subscription_name": "Visual Studio Professional"
+    },
+    {
+      "subscription_id": "26164634-d7d9-471d-911c-c3f1b17d0e6e",
+      "cost": 0.0,
+      "currency": "USD",
+      "error": "(429) Too many requests. Please retry.\nCode: 429\nMessage: Too many requests. Please retry.",
+      "subscription_name": "Visual Studio Professional"
+    }
+  ],
+  "total": 261942.85,
+  "currency": "USD",
+  "period_days": 30,
+  "start_date": "2026-01-10T11:35:12.750804",
+  "end_date": "2026-02-09T11:35:12.750804"
+}

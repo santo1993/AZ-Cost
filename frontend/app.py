@@ -142,7 +142,7 @@ with st.sidebar:
                 time.sleep(2)
                 st.rerun()
 
-    st.markdown("---")
+            st.markdown("---")
     st.markdown("### Settings")
     
     if st.checkbox("Include Underutilized VMs (slow)", value=st.session_state.get("enable_underutilized_vm_check", False)):

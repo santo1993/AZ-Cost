@@ -16,8 +16,8 @@ with col_refresh:
         # Force backend refresh to update memory cache (e.g. schema changes)
         try:
             with st.spinner("Refreshing backend data..."):
-                # Get current zombie setting or default
-                current_zombie = st.session_state.get("zombie_days_input", 90)
+                                # Get current zombie setting or default
+                current_zombie = st.session_state.get("zombie_days_input", 30)
                 sub_ids = st.session_state.get("subscription_ids")
                 api_client.get_orphaned_resources(
                     subscription_ids=sub_ids, 
@@ -32,10 +32,10 @@ with col_refresh:
         st.rerun()
 
 with col_zombie:
-    zombie_days = st.selectbox(
+        zombie_days = st.selectbox(
         "Zombie Duration Threshold",
         options=[0, 30, 60, 90, 180, 365],
-        index=3,  # Default to 90 days (0, 30, 60, 90 is index 3)
+        index=1,  # Default to 30 days (0, 30, 60, 90 is index 1)
         help="Resources inactive longer than this threshold are flagged as zombies",
         format_func=lambda x: "All (Show all)" if x == 0 else f"{x} days",
         key="zombie_days_input"
@@ -54,7 +54,7 @@ include_underutilized_vms = st.session_state.get("enable_underutilized_vm_check"
 subs = st.session_state.get("subscription_ids")
 
 # Helper to load scan data
-def get_cached_savings_data(zombie_days: int = 90):
+def get_cached_savings_data(zombie_days: int = 30):
     """Check session state first, then try to load from scan.
     Filters Old Snapshots by the zombie_days threshold.
     """
@@ -80,7 +80,7 @@ def get_cached_savings_data(zombie_days: int = 90):
     
     # Check session state cache
     if "cached_savings_issues" in st.session_state:
-        last_zombie_days = st.session_state.get("last_zombie_days", 90)
+        last_zombie_days = st.session_state.get("last_zombie_days", 30)
         
         # If we have data for X days, we can answer queries for Y days where Y >= X
         # But if user wants Y < X (e.g. 30 days but cache has 90), we need more data -> Invalid

@@ -75,10 +75,15 @@ class SubscriptionService:
             subs = list(client.subscriptions.list())
             details = []
             for s in subs:
+                # Handle state - it might be a string or an enum
+                state = "Unknown"
+                if hasattr(s, 'state') and s.state:
+                    state = s.state.value if hasattr(s.state, 'value') else str(s.state)
+                
                 details.append({
                     "subscription_id": s.subscription_id,
                     "display_name": s.display_name,
-                    "state": s.state.value if s.state else "Unknown"
+                    "state": state
                 })
             
             logger.info(f"Fetched details for {len(details)} subscriptions.")

@@ -33,14 +33,16 @@ async def debug_exception_handler(request: Request, exc: Exception):
         content={"detail": "Internal Server Error", "traceback": error_msg}
     )
 
-# CORS Rules
+# CORS Rules - Allow access from configured origins (localhost, IP addresses, domain names)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_url, "http://localhost:8501"],
+    allow_origins=settings.cors_origins_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+logger.info(f"CORS enabled for origins: {settings.cors_origins_list}")
 
 # Middleware for Logger and Correlation ID
 @app.middleware("http")

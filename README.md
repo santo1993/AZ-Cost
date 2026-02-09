@@ -81,6 +81,54 @@ streamlit run app.py --server.port 8501
 ```
 _Frontend runs at http://localhost:8501_
 
+## 🌐 Network Access Configuration
+
+### Access via IP Address or Domain Name
+
+By default, the dashboard runs on localhost. To access it from other devices on your network or via a domain name:
+
+**Quick Setup:**
+
+1. **Run the configuration wizard:**
+   ```powershell
+   ./configure_network.ps1
+   ```
+   This interactive script will help you configure network access.
+
+2. **Test your configuration:**
+   ```powershell
+   ./test_network.ps1
+   ```
+   This verifies connectivity and configuration.
+
+**Manual Configuration:**
+
+For IP address access (e.g., `192.168.1.100`):
+
+1. Edit `.env` in the project root:
+   ```env
+   BACKEND_HOST=0.0.0.0
+   BACKEND_PUBLIC_URL=http://192.168.1.100:8000
+   ALLOWED_ORIGINS=http://192.168.1.100:8501,http://localhost:8501
+   ```
+
+2. Edit `frontend/.env`:
+   ```env
+   BACKEND_URL=http://192.168.1.100:8000
+   ```
+
+3. Configure firewall (run as Administrator):
+   ```powershell
+   New-NetFirewallRule -DisplayName "Azure Dashboard Backend" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow
+   New-NetFirewallRule -DisplayName "Azure Dashboard Frontend" -Direction Inbound -LocalPort 8501 -Protocol TCP -Action Allow
+   ```
+
+4. Access from any device on your network:
+   - Frontend: `http://192.168.1.100:8501`
+   - Backend API: `http://192.168.1.100:8000/docs`
+
+**For detailed configuration options including domain names, HTTPS, and production deployment, see [NETWORK_ACCESS_GUIDE.md](NETWORK_ACCESS_GUIDE.md)**
+
 ## 🏗️ Project Structure
 
 *   **/backend**: FastAPI application handling Azure API logic, caching, and data processing.
@@ -91,3 +139,13 @@ _Frontend runs at http://localhost:8501_
 
 *   **Timeout Errors**: If you have many subscriptions (50+), the initial load might be slow. Configure `AZURE_SUBSCRIPTION_IDS` in `.env` to limit scope or allow time for the cache to warm up.
 *   **$0 Costs**: Ensure your user/SPN has `Cost Management Reader` permissions on the subscriptions.
+*   **Cannot connect from other devices**: 
+    - Verify `BACKEND_HOST=0.0.0.0` in `.env`
+    - Check firewall rules are configured
+    - Run `./test_network.ps1` to diagnose issues
+*   **CORS errors**: Add the client URL to `ALLOWED_ORIGINS` in `.env` and restart the backend
+
+## 📚 Additional Documentation
+
+- **[Network Access Guide](NETWORK_ACCESS_GUIDE.md)** - Detailed guide for IP/domain access configuration
+- **[API Documentation](http://localhost:8000/docs)** - Interactive API documentation (when backend is running)

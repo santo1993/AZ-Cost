@@ -1,5 +1,4 @@
-"""
-API Router for Scans.
+"""API Router for Scans.
 Manages background scans and partial data retrieval.
 """
 from fastapi import APIRouter, BackgroundTasks, HTTPException

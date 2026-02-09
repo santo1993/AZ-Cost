@@ -52,7 +52,7 @@ class Settings(BaseSettings):
     azure_storage_sas_token: Optional[str] = Field(default=None)
     azure_cost_export_path: Optional[str] = Field(default=None)
     
-    # Server Settings
+        # Server Settings
     backend_host: str = Field(default="0.0.0.0")
     backend_port: int = Field(default=8000)
     log_level: str = Field(default="INFO")
@@ -61,6 +61,16 @@ class Settings(BaseSettings):
     frontend_url: str = Field(
         default="http://localhost:8501",
         description="Frontend URL for CORS"
+    )
+    allowed_origins: Optional[str] = Field(
+        default=None,
+        description="Comma-separated list of allowed origins for CORS (e.g., http://192.168.1.100:8501,http://yourdomain.com:8501)"
+    )
+    
+    # Public Access Settings
+    backend_public_url: Optional[str] = Field(
+        default=None,
+        description="Public URL for backend API (e.g., http://192.168.1.100:8000 or http://api.yourdomain.com)"
     )
     
     # Detection Thresholds
@@ -73,7 +83,7 @@ class Settings(BaseSettings):
         description="Days after which a snapshot is considered old"
     )
     log_analytics_retention_threshold: int = Field(
-        default=31,
+                default=31,
         description="Retention days threshold for Log Analytics"
     )
     
@@ -83,6 +93,15 @@ class Settings(BaseSettings):
         if not self.azure_subscription_ids:
             return []
         return [s.strip() for s in self.azure_subscription_ids.split(",") if s.strip()]
+    
+    @property
+    def cors_origins_list(self) -> List[str]:
+        """Get list of allowed CORS origins including frontend_url and custom origins."""
+        origins = [self.frontend_url, "http://localhost:8501"]
+        if self.allowed_origins:
+            custom_origins = [o.strip() for o in self.allowed_origins.split(",") if o.strip()]
+            origins.extend(custom_origins)
+        return list(set(origins))  # Remove duplicates
     
     @property
     def cache_ttl_seconds(self) -> int:

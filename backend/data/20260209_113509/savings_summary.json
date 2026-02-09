@@ -1,0 +1,8 @@
+{
+  "total_potential_monthly_savings": 16067.47,
+  "components": {
+    "orphaned": 16067.47,
+    "advisor": 0,
+    "underutilized_vms": 0
+  }
+}
