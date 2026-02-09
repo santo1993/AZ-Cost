@@ -37,6 +37,17 @@ class ApiClient:
             st.error(f"API Error ({endpoint}): {e}")
             return {"status": "error", "message": str(e)}
 
+    def _delete(self, endpoint: str, timeout: int = 30) -> Any:
+        """DELETE request wrapper."""
+        try:
+            url = f"{self.base_url}/api{endpoint}"
+            response = self.session.delete(url, timeout=timeout)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            st.error(f"API Error ({endpoint}): {e}")
+            return {"status": "error", "message": str(e)}
+
     def get_savings_summary(self, subscription_ids: Optional[str] = None) -> Dict[str, Any]:
         params = {}
         if subscription_ids:
@@ -65,15 +76,13 @@ class ApiClient:
         params = {"cpu_threshold": cpu_threshold, "days": days}
         if subscription_ids:
             params["subscription_ids"] = subscription_ids
-        return self._get("/underutilized-vms", params, timeout=360) or []  # 6 min timeout for full VM scan
+        return self._get("/underutilized-vms", params, timeout=360) or []
 
-    
     def get_subscription_costs(self, subscription_ids: Optional[str] = None, days: int = 30) -> Dict[str, Any]:
         """Fetch total costs by subscription."""
         params = {"days": days}
         if subscription_ids:
             params["subscription_ids"] = subscription_ids
-        # Timeout needs to be high for 75+ subscriptions
         return self._get("/costs", params, timeout=180) or {"subscriptions": [], "total": 0.0}
 
     def get_costs_by_resource_group(self, subscription_ids: Optional[str] = None, days: int = 30) -> List[Dict[str, Any]]:
@@ -82,19 +91,17 @@ class ApiClient:
             params["subscription_ids"] = subscription_ids
         return self._get("/costs/by-resource-group", params, timeout=60) or []
 
-    
     def get_monthly_cost_history(self, subscription_ids: Optional[str] = None, months: int = 12) -> Dict[str, Any]:
         """Fetch monthly cost history."""
         params = {"months": months}
         if subscription_ids:
-             params["subscription_ids"] = subscription_ids
+            params["subscription_ids"] = subscription_ids
         return self._get("/costs/monthly-history", params, timeout=180) or {"months": [], "services": [], "data": []}
 
-        # Scan Management
     def start_scan(self, mode: str = "live") -> Dict[str, Any]:
         """Trigger a new background scan (mode: 'live' or 'export')."""
         return self._post(f"/scans/start?mode={mode}", timeout=10)
-        
+
     def get_scan_status(self) -> Dict[str, Any]:
         """Get status of current running scan."""
         return self._get("/scans/status", timeout=5)
@@ -102,14 +109,26 @@ class ApiClient:
     def get_enrichment_status(self, scan_id: str) -> Dict[str, Any]:
         """Get status of background VM enrichment."""
         return self._get(f"/scans/enrichment-status?scan_id={scan_id}", timeout=5)
-        
+
     def list_scans(self) -> List[Dict[str, Any]]:
         """List historical scans."""
         return self._get("/scans", timeout=120) or []
-        
+
     def get_scan_data(self, scan_id: str) -> Dict[str, Any]:
         """Get full data for a specific scan."""
         return self._get(f"/scans/{scan_id}", timeout=120)
+
+    def clear_backend_cache(self) -> Dict[str, Any]:
+        """Clear backend memory cache."""
+        return self._post("/scans/clear-cache", timeout=10)
+
+    def delete_scan(self, scan_id: str) -> Dict[str, Any]:
+        """Delete a specific scan from disk."""
+        return self._delete(f"/scans/{scan_id}", timeout=10)
+
+    def cleanup_old_scans(self, keep_count: int = 5) -> Dict[str, Any]:
+        """Delete old scans, keeping only the most recent N scans."""
+        return self._post(f"/scans/cleanup-old-scans?keep_count={keep_count}", timeout=30)
 
     def get_subscriptions(self) -> List[Dict[str, Any]]:
         """Get list of all subscriptions with names and IDs."""
@@ -123,43 +142,43 @@ api_client = ApiClient()
 # No TTL = data stays cached until manual refresh
 # =============================================
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_savings_summary(subscription_ids: Optional[str] = None) -> Dict[str, Any]:
     return api_client.get_savings_summary(subscription_ids)
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_resources(subscription_ids: Optional[str] = None, limit: int = 1000) -> List[Dict[str, Any]]:
     return api_client.get_resources(subscription_ids, limit)
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_advisor_recommendations(subscription_ids: Optional[str] = None) -> List[Dict[str, Any]]:
     return api_client.get_advisor_recommendations(subscription_ids)
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_orphaned_resources(subscription_ids: Optional[str] = None, zombie_days: int = 30, include_costs: bool = True) -> List[Dict[str, Any]]:
     return api_client.get_orphaned_resources(subscription_ids, zombie_days, include_costs)
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_underutilized_vms(subscription_ids: Optional[str] = None, cpu_threshold: float = 5.0, days: int = 7) -> List[Dict[str, Any]]:
     return api_client.get_underutilized_vms(subscription_ids, cpu_threshold, days)
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_costs(subscription_ids: Optional[str] = None, days: int = 30) -> Dict[str, Any]:
     return api_client.get_subscription_costs(subscription_ids, days)
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_costs_by_resource_group(subscription_ids: Optional[str] = None, days: int = 30) -> List[Dict[str, Any]]:
     return api_client.get_costs_by_resource_group(subscription_ids, days)
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_monthly_cost_history(subscription_ids: Optional[str] = None, months: int = 12) -> Dict[str, Any]:
     return api_client.get_monthly_cost_history(subscription_ids, months)
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def cached_get_subscriptions() -> List[Dict[str, Any]]:
     return api_client.get_subscriptions()
 
-@st.cache_data(show_spinner=False)  # No TTL - persists until refresh
+@st.cache_data(show_spinner=False)
 def get_subscription_name_map() -> Dict[str, str]:
     """Returns a dict mapping subscription_id -> subscription_name."""
     try:

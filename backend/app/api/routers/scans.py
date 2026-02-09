@@ -4,6 +4,7 @@ Manages background scans and partial data retrieval.
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from typing import Dict, Any, List
 import asyncio
+import os
 from datetime import datetime
 
 from ...services.scan_service import scan_service
@@ -13,7 +14,9 @@ from ...services.advisor_service import advisor_service
 from ...services.underutilized_vm_service import underutilized_vm_service
 from ...services.subscription_service import subscription_service
 from ...services.vm_enrichment_service import vm_enrichment_service
+from ...cache.memory_cache import memory_cache
 from ...utils.logger import get_logger
+import shutil
 
 router = APIRouter(prefix="/scans", tags=["scans"])
 logger = get_logger(__name__)
@@ -198,3 +201,67 @@ async def get_scan(scan_id: str):
     if not data:
         raise HTTPException(status_code=404, message="Scan not found")
     return data
+
+@router.post("/clear-cache")
+async def clear_cache():
+    """Clear backend memory cache."""
+    try:
+        memory_cache.clear()
+        logger.info("Memory cache cleared via API")
+        return {"status": "success", "message": "Memory cache cleared"}
+    except Exception as e:
+        logger.error(f"Failed to clear cache: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.delete("/{scan_id}")
+async def delete_scan(scan_id: str):
+    """Delete a specific scan from disk."""
+    try:
+        scan_path = scan_service._get_scan_path(scan_id)
+        if not os.path.exists(scan_path):
+            raise HTTPException(status_code=404, detail="Scan not found")
+        
+        shutil.rmtree(scan_path)
+        logger.info(f"Deleted scan {scan_id}")
+        return {"status": "success", "message": f"Scan {scan_id} deleted"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to delete scan {scan_id}: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/cleanup-old-scans")
+async def cleanup_old_scans(keep_count: int = 5):
+    """Delete old scans, keeping only the most recent N scans."""
+    try:
+        scans = scan_service.list_scans()
+        if len(scans) <= keep_count:
+            return {
+                "status": "success",
+                "message": f"No cleanup needed. Current scans: {len(scans)}, Keep: {keep_count}",
+                "deleted_count": 0
+            }
+        
+        # Delete older scans
+        scans_to_delete = scans[keep_count:]
+        deleted_count = 0
+        
+        for scan in scans_to_delete:
+            scan_id = scan.get("scan_id")
+            try:
+                scan_path = scan_service._get_scan_path(scan_id)
+                if os.path.exists(scan_path):
+                    shutil.rmtree(scan_path)
+                    deleted_count += 1
+                    logger.info(f"Deleted old scan {scan_id}")
+            except Exception as e:
+                logger.warning(f"Failed to delete scan {scan_id}: {e}")
+        
+        return {
+            "status": "success",
+            "message": f"Deleted {deleted_count} old scans, kept {keep_count} most recent",
+            "deleted_count": deleted_count
+        }
+    except Exception as e:
+        logger.error(f"Failed to cleanup old scans: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
