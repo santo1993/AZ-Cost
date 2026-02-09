@@ -7,6 +7,7 @@ Uses concurrent execution for faster multi-subscription queries.
 
 from typing import List, Dict, Any, Optional
 from datetime import datetime, timedelta
+import calendar
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from azure.mgmt.costmanagement import CostManagementClient
@@ -30,6 +31,23 @@ logger = get_logger(__name__)
 _executor = ThreadPoolExecutor(max_workers=5)
 
 class CostService:
+    
+    def _get_last_month_dates(self) -> tuple:
+        """Calculate the first and last day of the previous calendar month."""
+        today = datetime.utcnow()
+        # Get first day of current month
+        first_of_current_month = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        # Last day of previous month is one day before first of current month
+        last_day_prev_month = first_of_current_month - timedelta(days=1)
+        # First day of previous month
+        first_day_prev_month = last_day_prev_month.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        # End of last day of previous month
+        end_of_last_day = last_day_prev_month.replace(hour=23, minute=59, second=59, microsecond=999999)
+        
+        # Format month name for display (e.g., "January 2024")
+        month_name = last_day_prev_month.strftime("%B %Y")
+        
+        return first_day_prev_month, end_of_last_day, month_name
     
     def _query_subscription_cost(self, sub_id: str, start_date: datetime, end_date: datetime, days: int) -> Dict[str, Any]:
         """Sync method to query cost for a single subscription."""
@@ -63,26 +81,26 @@ class CostService:
             if response.rows:
                 # Sum up cost from all daily rows
                 for row in response.rows:
-                     if row[0]:
-                         cost += float(row[0])
+                    if row[0]:
+                        cost += float(row[0])
             
             # FALLBACK: If ActualCost is 0, try AmortizedCost
             if cost == 0.0:
-                 logger.info(f"Subscription {sub_id}: ActualCost is 0, trying AmortizedCost...")
-                 query.type = ExportType.AMORTIZED_COST
-                 response = client.query.usage(scope=scope, parameters=query)
-                 if response.rows:
+                logger.info(f"Subscription {sub_id}: ActualCost is 0, trying AmortizedCost...")
+                query.type = ExportType.AMORTIZED_COST
+                response = client.query.usage(scope=scope, parameters=query)
+                if response.rows:
                     for row in response.rows:
                         if row[0]:
                             cost += float(row[0])
-                 logger.info(f"Subscription {sub_id}: AmortizedCost = ${cost:.2f}")
+                logger.info(f"Subscription {sub_id}: AmortizedCost = ${cost:.2f}")
             else:
                 logger.info(f"Subscription {sub_id}: Total Cost = ${cost:.2f}")
             
             return {
                 "subscription_id": sub_id,
                 "cost": round(cost, 2),
-                "currency": "USD", # Defaulting to USD, should ideally take from response
+                "currency": "USD",
                 "period_days": days
             }
             
@@ -98,7 +116,7 @@ class CostService:
             }
     
     async def get_subscription_costs(self, subscription_ids: List[str] = None, days: int = 30) -> Dict[str, Any]:
-        """Get total costs by subscription for the specified time period (parallel execution)."""
+        """Get total costs by subscription for the last calendar month (parallel execution)."""
         from azure.mgmt.subscription import SubscriptionClient
         
         subs = subscription_ids
@@ -121,8 +139,10 @@ class CostService:
         
         from ..utils.batch import batch_process
         
-        end_date = datetime.utcnow()
-        start_date = end_date - timedelta(days=days)
+        # Always use last calendar month
+        start_date, end_date, month_name = self._get_last_month_dates()
+        # Calculate actual days in the month
+        days = (end_date - start_date).days + 1
         
         # Define processor function for batching
         async def process_sub(sub_id):
@@ -157,6 +177,7 @@ class CostService:
             "total": round(total_cost, 2),
             "currency": "USD",
             "period_days": days,
+            "period_name": month_name,
             "start_date": start_date.isoformat(),
             "end_date": end_date.isoformat()
         }
@@ -176,7 +197,7 @@ class CostService:
                     to=end_date
                 ),
                 dataset=QueryDataset(
-                    granularity="Daily", # Changed from None to Daily
+                    granularity="Daily",
                     aggregation={
                         "totalCost": QueryAggregation(
                             name="Cost",
@@ -199,14 +220,6 @@ class CostService:
             if response.rows:
                 for row in response.rows:
                     cost = float(row[0]) if row[0] else 0.0
-                    # With Daily granularity, row structure might trigger date column?
-                    # Usually [Cost, Date, ResourceGroup] or [Cost, ResourceGroup, Date] ?
-                    # Let's check grouping order or assume last cols are dimensions
-                    # Typically: [Cost, Date, Grouping1, Grouping2...]
-                    # row[0] = Cost
-                    # row[1] = UsageDate (because Daily)
-                    # row[2] = ResourceGroup
-                    
                     rg_name = "Unknown"
                     if len(row) > 2:
                         rg_name = row[2]
@@ -230,7 +243,7 @@ class CostService:
             return []
     
     async def get_costs_by_resource_group(self, subscription_ids: List[str] = None, days: int = 30) -> List[Dict[str, Any]]:
-        """Get costs grouped by resource group (parallel execution)."""
+        """Get costs grouped by resource group for last calendar month (parallel execution)."""
         subs = subscription_ids
         if not subs:
             subs = await subscription_service.get_subscriptions()
@@ -238,8 +251,8 @@ class CostService:
         if not subs:
             return []
         
-        end_date = datetime.utcnow()
-        start_date = end_date - timedelta(days=days)
+        # Always use last calendar month
+        start_date, end_date, month_name = self._get_last_month_dates()
         
         loop = asyncio.get_event_loop()
         tasks = [
@@ -417,7 +430,7 @@ class CostService:
 
     async def get_costs_by_resource(self, subscription_ids: List[str] = None, days: int = 30) -> Dict[str, float]:
         """
-        Get costs by individual resource ID (parallel execution).
+        Get costs by individual resource ID for last calendar month (parallel execution).
         Returns a dict mapping resource_id (lowercase) -> cost.
         """
         subs = subscription_ids
@@ -427,8 +440,8 @@ class CostService:
         if not subs:
             return {}
         
-        end_date = datetime.utcnow()
-        start_date = end_date - timedelta(days=days)
+        # Always use last calendar month
+        start_date, end_date, month_name = self._get_last_month_dates()
         
         loop = asyncio.get_event_loop()
         tasks = [

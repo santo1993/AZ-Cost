@@ -18,7 +18,8 @@ async def get_subscription_costs(
     force_refresh: bool = False
 ) -> Dict[str, Any]:
     """
-    Get total costs by subscription for the last N days.
+    Get total costs by subscription for the last calendar month.
+    Note: 'days' parameter is ignored - always returns last complete month.
     """
     subs = subscription_ids.split(",") if subscription_ids else None
     cache_key = f"costs:{subs}:{days}"
@@ -36,7 +37,8 @@ async def get_costs_by_resource_group(
     force_refresh: bool = False
 ) -> List[Dict[str, Any]]:
     """
-    Get costs grouped by resource group for the last N days.
+    Get costs grouped by resource group for the last calendar month.
+    Note: 'days' parameter is ignored - always returns last complete month.
     """
     subs = subscription_ids.split(",") if subscription_ids else None
     cache_key = f"costs_by_rg:{subs}:{days}"
@@ -73,7 +75,8 @@ async def get_costs_by_resource(
     force_refresh: bool = False
 ) -> Dict[str, float]:
     """
-    Get costs by individual resource ID for the last N days.
+    Get costs by individual resource ID for the last calendar month.
+    Note: 'days' parameter is ignored - always returns last complete month.
     Returns a dict mapping resource_id -> cost.
     """
     subs = subscription_ids.split(",") if subscription_ids else None

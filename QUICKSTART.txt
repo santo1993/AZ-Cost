@@ -1,0 +1,60 @@
+===========================================
+  AZURE COST DASHBOARD - QUICK START
+===========================================
+
+START SERVICES (Background):
+  .\manage.ps1 start -Background
+
+START SERVICES (Foreground):
+  .\manage.ps1 start
+  OR
+  .\run_local.ps1
+
+CHECK STATUS:
+  .\manage.ps1 status
+
+STOP SERVICES:
+  .\manage.ps1 stop
+
+FORCE KILL (if stop fails):
+  .\manage.ps1 kill
+
+RESTART SERVICES:
+  .\manage.ps1 restart -Background
+
+VIEW LOGS:
+  .\manage.ps1 logs
+
+ACCESS URLS:
+  Dashboard:  http://localhost:8501
+  API:        http://localhost:8000
+  API Docs:   http://localhost:8000/docs
+
+TROUBLESHOOTING:
+  1. Check status:
+     .\manage.ps1 status
+  
+  2. View error logs:
+     .\manage.ps1 logs
+  
+  3. Restart services:
+     .\manage.ps1 restart -Background
+  
+  4. If services won't stop:
+     .\manage.ps1 kill
+     .\manage.ps1 start -Background
+  
+  4. Follow logs in real-time:
+     Get-Content logs\backend.log -Tail 50 -Wait
+
+COMMON ISSUES:
+  - Connection refused: Backend not running
+    Solution: .\manage.ps1 start -Background
+  
+  - Port already in use: Services already running
+    Solution: .\manage.ps1 restart -Background
+  
+  - Missing dependencies:
+    Solution: .\manage.ps1 start -Install -Background
+
+===========================================

@@ -95,14 +95,15 @@ with st.spinner("Loading data..."):
     savings_by_cat = savings_data.get("savings_by_category", {})
 
 # KPI Row
-st.subheader("📊 Cost Overview (Last 30 Days)")
+period_name = cost_data.get('period_name', 'Last Month')
+st.subheader(f"📊 Cost Overview ({period_name})")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     render_kpi_card(
         "Total Spend", 
         f"${total_spend:,.2f}", 
-        f"{cost_data.get('period_days', 30)} days",
+        period_name,
         color="blue"
     )
 
