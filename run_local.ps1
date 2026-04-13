@@ -46,18 +46,18 @@ if (-not (Test-Path "backend/.env")) {
 }
 if (-not (Test-Path "frontend/.env")) {
     Write-Host "Creating frontend/.env..." -ForegroundColor Yellow
-    Set-Content "frontend/.env" "BACKEND_URL=http://localhost:8000"
+    Set-Content "frontend/.env" "BACKEND_URL=http://localhost:8080"
 }
 
 # Start Backend
-Write-Host "Starting Backend (Port 8000)..." -ForegroundColor Cyan
-Start-Process -FilePath "python" -ArgumentList "-m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload" -WorkingDirectory $backendPath -NoNewWindow
+Write-Host "Starting Backend (Port 8080)..." -ForegroundColor Cyan
+Start-Process -FilePath "python" -ArgumentList "-m uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload" -WorkingDirectory $backendPath -NoNewWindow
 
 # Wait for backend
 Start-Sleep -Seconds 5
 
 # Start Frontend
-Write-Host "Starting Frontend (Port 8501)..." -ForegroundColor Cyan
-Start-Process -FilePath "python" -ArgumentList "-m streamlit run app.py --server.port 8501" -WorkingDirectory $frontendPath -NoNewWindow
+Write-Host "Starting Frontend (Port 8502)..." -ForegroundColor Cyan
+Start-Process -FilePath "python" -ArgumentList "-m streamlit run app.py --server.port 8502" -WorkingDirectory $frontendPath -NoNewWindow
 
 Write-Host "Services started! Press Ctrl+C to stop." -ForegroundColor Green

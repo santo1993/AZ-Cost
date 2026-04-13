@@ -1,0 +1,112 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║         Azure Cost Dashboard - Quick Reference Card          ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────┐
+│ ✅ CONFIGURATION STATUS                                      │
+└──────────────────────────────────────────────────────────────┘
+
+  ✓ Backend Port:  8080  (Configured & Available)
+  ✓ Frontend Port: 8502  (Configured & Available)
+  ✓ All files:     Correct
+  ⚠ Status:        NOT RUNNING (needs to be started)
+
+┌──────────────────────────────────────────────────────────────┐
+│ 🚀 START THE APPLICATION                                     │
+└──────────────────────────────────────────────────────────────┘
+
+  Quick Start:
+    .\START-DASHBOARD.ps1
+
+  Or use management script:
+    .\manage.ps1 start -Background
+
+┌──────────────────────────────────────────────────────────────┐
+│ 🌐 ACCESS URLS                                               │
+└──────────────────────────────────────────────────────────────┘
+
+  Dashboard:   http://localhost:8502
+  API:         http://localhost:8080
+  API Docs:    http://localhost:8080/docs
+  Health:      http://localhost:8080/health
+
+  Network:
+  Dashboard:   http://10.137.3.39:8502
+  API:         http://10.137.3.39:8080
+
+┌──────────────────────────────────────────────────────────────┐
+│ 🔧 MANAGEMENT COMMANDS                                       │
+└──────────────────────────────────────────────────────────────┘
+
+  .\manage.ps1 start -Background    Start services
+  .\manage.ps1 stop                 Stop services
+  .\manage.ps1 status               Check status
+  .\manage.ps1 restart -Background  Restart services
+  .\manage.ps1 logs                 View logs
+  .\manage.ps1 kill                 Force kill
+
+┌──────────────────────────────────────────────────────────────┐
+│ 🔍 VERIFY SERVICES                                           │
+└──────────────────────────────────────────────────────────────┘
+
+  Check Status:
+    .\manage.ps1 status
+
+  Test Backend:
+    Invoke-WebRequest -Uri "http://localhost:8080/health"
+
+  Test Frontend:
+    Invoke-WebRequest -Uri "http://localhost:8502"
+
+┌──────────────────────────────────────────────────────────────┐
+│ ⚠️  IMPORTANT NOTES                                          │
+└──────────────────────────────────────────────────────────────┘
+
+  • Ports 8000 & 8501 are BLOCKED by Windows (PID 4)
+  • Use ports 8080 & 8502 instead (already configured)
+  • All configuration files are CORRECT - no changes needed
+  • Application is NOT running - you need to START it
+
+┌──────────────────────────────────────────────────────────────┐
+│ 📊 PORT STATUS                                               │
+└──────────────────────────────────────────────────────────────┘
+
+  8000  ❌ BLOCKED (Windows System)
+  8080  ✅ AVAILABLE (Backend)
+  8501  ❌ BLOCKED (Windows System)
+  8502  ✅ AVAILABLE (Frontend)
+
+┌──────────────────────────────────────────────────────────────┐
+│ 🎯 NEXT STEPS                                                │
+└──────────────────────────────────────────────────────────────┘
+
+  1. Start the application:
+     .\START-DASHBOARD.ps1
+
+  2. Verify it's running:
+     .\manage.ps1 status
+
+  3. Open dashboard:
+     http://localhost:8502
+
+  4. Check API docs:
+     http://localhost:8080/docs
+
+┌──────────────────────────────────────────────────────────────┐
+│ 📚 DOCUMENTATION                                             │
+└──────────────────────────────────────────────────────────────┘
+
+  CONFIGURATION-COMPLETE.md      Complete review & summary
+  PORT-CONFIGURATION-SUMMARY.md  Port configuration details
+  README.md                      Full project documentation
+  QUICK-REFERENCE.md             Quick reference guide
+
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║  ✅ CONFIGURATION IS COMPLETE - READY TO START!             ║
+║                                                              ║
+║  Run: .\START-DASHBOARD.ps1                                 ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝

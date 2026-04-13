@@ -54,23 +54,23 @@ class Settings(BaseSettings):
     
         # Server Settings
     backend_host: str = Field(default="0.0.0.0")
-    backend_port: int = Field(default=8000)
+    backend_port: int = Field(default=8080)
     log_level: str = Field(default="INFO")
     
     # CORS Settings
     frontend_url: str = Field(
-        default="http://localhost:8501",
+        default="http://localhost:8502",
         description="Frontend URL for CORS"
     )
     allowed_origins: Optional[str] = Field(
         default=None,
-        description="Comma-separated list of allowed origins for CORS (e.g., http://192.168.1.100:8501,http://yourdomain.com:8501)"
+        description="Comma-separated list of allowed origins for CORS (e.g., http://192.168.1.100:8502,http://yourdomain.com:8502)"
     )
     
     # Public Access Settings
     backend_public_url: Optional[str] = Field(
         default=None,
-        description="Public URL for backend API (e.g., http://192.168.1.100:8000 or http://api.yourdomain.com)"
+        description="Public URL for backend API (e.g., http://192.168.1.100:8080 or http://api.yourdomain.com)"
     )
     
     # Detection Thresholds
@@ -97,7 +97,7 @@ class Settings(BaseSettings):
     @property
     def cors_origins_list(self) -> List[str]:
         """Get list of allowed CORS origins including frontend_url and custom origins."""
-        origins = [self.frontend_url, "http://localhost:8501"]
+        origins = [self.frontend_url, "http://localhost:8502"]
         if self.allowed_origins:
             custom_origins = [o.strip() for o in self.allowed_origins.split(",") if o.strip()]
             origins.extend(custom_origins)

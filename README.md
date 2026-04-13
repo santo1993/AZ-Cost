@@ -70,16 +70,16 @@ Or run them manually in separate terminals:
 **Backend (FastAPI)**:
 ```powershell
 cd backend
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8080
 ```
-_Backend runs at http://localhost:8000_
+_Backend runs at http://localhost:8080_
 
 **Frontend (Streamlit)**:
 ```powershell
 cd frontend
-streamlit run app.py --server.port 8501
+streamlit run app.py --server.port 8502
 ```
-_Frontend runs at http://localhost:8501_
+_Frontend runs at http://localhost:8502_
 
 ## 🌐 Network Access Configuration
 
@@ -108,24 +108,24 @@ For IP address access (e.g., `192.168.1.100`):
 1. Edit `.env` in the project root:
    ```env
    BACKEND_HOST=0.0.0.0
-   BACKEND_PUBLIC_URL=http://192.168.1.100:8000
-   ALLOWED_ORIGINS=http://192.168.1.100:8501,http://localhost:8501
+   BACKEND_PUBLIC_URL=http://192.168.1.100:8080
+   ALLOWED_ORIGINS=http://192.168.1.100:8502,http://localhost:8502
    ```
 
 2. Edit `frontend/.env`:
    ```env
-   BACKEND_URL=http://192.168.1.100:8000
+   BACKEND_URL=http://192.168.1.100:8080
    ```
 
 3. Configure firewall (run as Administrator):
    ```powershell
-   New-NetFirewallRule -DisplayName "Azure Dashboard Backend" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow
-   New-NetFirewallRule -DisplayName "Azure Dashboard Frontend" -Direction Inbound -LocalPort 8501 -Protocol TCP -Action Allow
+   New-NetFirewallRule -DisplayName "Azure Dashboard Backend" -Direction Inbound -LocalPort 8080 -Protocol TCP -Action Allow
+   New-NetFirewallRule -DisplayName "Azure Dashboard Frontend" -Direction Inbound -LocalPort 8502 -Protocol TCP -Action Allow
    ```
 
 4. Access from any device on your network:
-   - Frontend: `http://192.168.1.100:8501`
-   - Backend API: `http://192.168.1.100:8000/docs`
+   - Frontend: `http://192.168.1.100:8502`
+   - Backend API: `http://192.168.1.100:8080/docs`
 
 **For detailed configuration options including domain names, HTTPS, and production deployment, see [NETWORK_ACCESS_GUIDE.md](NETWORK_ACCESS_GUIDE.md)**
 
@@ -148,4 +148,4 @@ For IP address access (e.g., `192.168.1.100`):
 ## 📚 Additional Documentation
 
 - **[Network Access Guide](NETWORK_ACCESS_GUIDE.md)** - Detailed guide for IP/domain access configuration
-- **[API Documentation](http://localhost:8000/docs)** - Interactive API documentation (when backend is running)
+- **[API Documentation](http://localhost:8080/docs)** - Interactive API documentation (when backend is running)

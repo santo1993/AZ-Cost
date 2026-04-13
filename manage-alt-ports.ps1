@@ -207,7 +207,7 @@ function Start-Services {
         $backendLog = Join-Path $logsPath "backend.log"
         $backendErrorLog = Join-Path $logsPath "backend_error.log"
         
-        $backendProcess = Start-Process -FilePath "python" `
+                $backendProcess = Start-Process -FilePath "python" `
             -ArgumentList "-m uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload" `
             -WorkingDirectory $backendPath `
             -WindowStyle Hidden `
@@ -253,7 +253,7 @@ function Start-Services {
         $frontendLog = Join-Path $logsPath "frontend.log"
         $frontendErrorLog = Join-Path $logsPath "frontend_error.log"
         
-        $frontendProcess = Start-Process -FilePath "python" `
+                $frontendProcess = Start-Process -FilePath "python" `
             -ArgumentList "-m streamlit run app.py --server.port 8502 --server.headless true" `
             -WorkingDirectory $frontendPath `
             -WindowStyle Hidden `
@@ -270,7 +270,7 @@ function Start-Services {
         
     } else {
         # Start in foreground
-        Write-Host "Starting Backend (Port 8080)..." -ForegroundColor Green
+                Write-Host "Starting Backend (Port 8080)..." -ForegroundColor Green
         Start-Process -FilePath "python" `
             -ArgumentList "-m uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload" `
             -WorkingDirectory $backendPath `
@@ -280,7 +280,7 @@ function Start-Services {
         Start-Sleep -Seconds 5
         
         Write-Host ""
-        Write-Host "Starting Frontend (Port 8502)..." -ForegroundColor Green
+                Write-Host "Starting Frontend (Port 8502)..." -ForegroundColor Green
         Start-Process -FilePath "python" `
             -ArgumentList "-m streamlit run app.py --server.port 8502" `
             -WorkingDirectory $frontendPath `
@@ -721,3 +721,4 @@ switch ($Action) {
         Force-KillDashboard
     }
 }
+

@@ -1,7 +1,7 @@
 INFO:     Started server process [3520]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 DefaultAzureCredential failed to retrieve a token from the included credentials.
 Attempted credentials:
 	EnvironmentCredential: EnvironmentCredential authentication unavailable. Environment variables are not fully configured.

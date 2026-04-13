@@ -47,7 +47,7 @@ This dashboard helps you identify cost savings opportunities in your Azure envir
 👈 **Select a page from the sidebar to get started.**
 """)
 
-st.info("System is running in **Active Verification Mode** connects to backend at `http://localhost:8000`")
+st.info("System is running in **Active Verification Mode** connects to backend at `http://localhost:8080`")
 
 # Sidebar Configuration
 with st.sidebar:

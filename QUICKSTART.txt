@@ -26,9 +26,9 @@ VIEW LOGS:
   .\manage.ps1 logs
 
 ACCESS URLS:
-  Dashboard:  http://localhost:8501
-  API:        http://localhost:8000
-  API Docs:   http://localhost:8000/docs
+  Dashboard:  http://localhost:8502
+  API:        http://localhost:8080
+  API Docs:   http://localhost:8080/docs
 
 TROUBLESHOOTING:
   1. Check status:
